@@ -1,0 +1,101 @@
+
+    
+    <nz-modal [(nzVisible)]="statusModal"
+    [nzWidth]="modalWidth"
+    [nzTitle]="tituloModal" 
+    [nzFooter]="null"
+    (nzOnCancel)="handleCancel()" 
+    (nzOnOk)="handleOk()">
+      <ng-container *nzModalContent>
+        <div *ngIf="loading" class="spinner-container">
+          <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
+        </div>       
+        <div class="row">
+            <div class="col-12">
+              <form [formGroup]="financeiroForm" (ngSubmit)="novoFinanceiro(1)">
+                <div class="row" style="display: flex; align-items: end;">
+                  <div class="col-6 text-light mb-3">
+                    <div class="inner-box">
+                      <label>Pessoa*</label><br>
+                      <nz-select formControlName="id_pessoa_origem" class="w-100" nzAllowClear nzPlaceHolder="Selecionar pessoa">
+                        <nz-option *ngFor="let pessoa of listPessoas" [nzValue]="pessoa.id" [nzLabel]="pessoa.nome"></nz-option>
+                      </nz-select>
+                      <div *ngIf="financeiroForm.get('id_pessoa_origem')?.invalid && financeiroForm.get('pessoa')?.touched">
+                        <small class="text-danger">Campo obrigatório</small>
+                      </div>                      
+                    </div>
+                  </div>
+                  <div class="col-3 text-light mb-3">
+                    <div class="inner-box">
+                      <label>Conta</label>
+                      <nz-select formControlName="id_conta" class="w-100" nzAllowClear nzPlaceHolder="Selecione conta">
+                        <nz-option *ngFor="let contas of listContas" [nzValue]="contas.id" [nzLabel]="contas.nome"></nz-option>
+                      </nz-select>
+                    </div>
+                  </div>
+                  <div class="col-3 text-light mb-3">
+                    <div class="inner-box">
+                      <label>Categoria</label>
+                      <nz-select formControlName="id_categoria_sf" class="w-100" nzAllowClear nzPlaceHolder="Selecione categoria">
+                        <nz-option *ngFor="let categorias of listCategorias" [nzValue]="categorias.id" [nzLabel]="categorias.nome"></nz-option>
+                      </nz-select>
+                    </div>
+                  </div>
+                  <div class="col-3 text-light mb-3">
+                    <div class="inner-box">
+                      <label>Data*</label>
+                      <nz-date-picker formControlName="dt_inc"
+                        (ngModelChange)="onChange($event)"
+                        [nzFormat]="'dd/MM/yyyy HH:mm:ss'"
+                        style="width: 100%;">
+                      </nz-date-picker>
+                      <div *ngIf="financeiroForm.get('dt_inc')?.invalid && financeiroForm.get('dt_inc')?.touched">
+                        <small class="text-danger">Campo obrigatório</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-3 text-light mb-3">
+                    <div class="inner-box">
+                      <label>Forma Pagamento</label>
+                      <nz-select formControlName="id_metodo" class="w-100" nzAllowClear nzPlaceHolder="Selecione">
+                        <nz-option *ngFor="let pagamentos of listMetodo" [nzValue]="pagamentos.id" [nzLabel]="pagamentos.nome"></nz-option>
+                      </nz-select>
+                    </div>
+                  </div>                 
+                  <div class="col-3 text-light mb-3">
+                    <div class="inner-box">
+                      <label>Valor(R$)*</label>
+                      <nz-input-number
+                        formControlName="valor"
+                        class="w-100"
+                        [nzMin]="0.01"
+                        [nzMax]="999999"
+                        [nzStep]="0.01"
+                        [nzFormatter]="formatterReal"
+                        [nzParser]="parserReal"
+                      ></nz-input-number>
+                      <div *ngIf="financeiroForm.get('valor')?.invalid && financeiroForm.get('valor')?.touched">
+                        <small class="text-danger">Campo obrigatório</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 text-light mb-3">
+                    <div class="inner-box">
+                      <label>Observações</label>
+                      <textarea formControlName="obs" rows="4" nz-input></textarea>
+                    </div>
+                  </div>
+                  <col-12>
+                    <hr>
+                  </col-12>
+                  <div class="col-12 text-light text-right mb-3">
+                    <button class="btn btn-sm btn-success h-100" type="submit"><i class="fa-solid fa-floppy-disk"></i> Salvar</button>
+                  </div>
+                </div>
+              </form>
+              
+            </div>
+        </div>
+      </ng-container>
+    </nz-modal>
+  

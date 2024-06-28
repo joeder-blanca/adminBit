@@ -1,0 +1,58 @@
+.bg-dark-light{
+  background-color: #363e4552;
+}
+
+.bg-success-light{
+  background-color: #1987542f;
+}
+
+.bg-danger-light{
+  background-color: #dc354636;
+}
+
+.bg-warning-light{
+  background-color: #d2f70042;
+}
+
+.bg-info-light{
+  background-color: #0dcaf036;
+}
+
+.bg-tr{
+  background-color: #6265681c;
+}
+
+.card{
+  background-color: rgba(240, 248, 255, 0) !important;
+}
+
+.text-right{
+  text-align: right !important;
+}
+@media (max-width: 768px) {
+  .hidden-sm {
+    display: none !important;
+  }
+
+  .t-sml{
+    font-size: smaller;
+  }
+
+  .t-sm{
+    font-size: small;
+  }
+}
+
+@media (min-width: 768px) {
+  .h-lg{
+    height: 300px !important;
+  }
+}
+
+.spinner-container {
+  position: fixed !important;
+  top: 45% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 1000 !important;
+}
