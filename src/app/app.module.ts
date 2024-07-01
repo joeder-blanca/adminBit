@@ -21,7 +21,6 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 import { LoginComponent } from './pages/login/login.component';
-import { HomeComponent } from './pages/home/home.component';
 
 import { AuthService } from './shared/services/auth.service';
 import { adminApiProvider } from './shared/services/admin.service';
@@ -50,7 +49,6 @@ registerLocaleData(pt);
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
     ReceitaComponent,
     NovoFinanceiroComponent,
     CadastroComponent

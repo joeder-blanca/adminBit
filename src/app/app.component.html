@@ -1,72 +1,138 @@
-<nz-layout class="app-layout" *ngIf="isAuthenticated(); else loginRedirect">
-  <nz-sider class="menu-sidebar hidden-sm"
-            nzCollapsible
-            nzWidth="256px"
-            nzBreakpoint="md"
-            [(nzCollapsed)]="isCollapsed"
-            [nzTrigger]="null">
-    <div class="sidebar-logo b">
-      <a routerLink="/home">
-        <img *ngIf="!isCollapsed" src="assets/img/logo-light.png" style="width: 28%;" alt="logo">
-        <img *ngIf="isCollapsed" src="assets/img/logo-light-sm.png" class="" alt="logo">
-      </a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <!-- <img src="../assets/img/logo-light-sm.png" alt=""> -->
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item">
+          <a class="nav-link active">Administração</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Loja</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" >Serviços</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" >Cantina</a>
+        </li>
+      </ul>
     </div>
-    <ul nz-menu class="bg-dark text-light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li  nz-submenu nzOpen nzTitle="Financeiro" nzIcon="dollar">
-        <ul class="bg-dark">
-          <li nz-menu-item nzMatchRouter>
-            <a class="text-light" routerLink="/receitas">Receitas</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a class="text-light" routerLink="/despesas">Despesas</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a class="text-light" routerLink="/contas">Pagar/Receber</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </nz-sider>
-  <nz-layout  class="bg-content">
-    <nz-header>
-      <div class="app-header bg-dark text-light">
-        <div class="row">
-          <div class="col-6">
-            <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-              <span class="trigger"
-                 nz-icon
-                 [nzType]="isCollapsed ? 'right-circle' : 'left-circle'"
-              ></span>
-          </span>
-          </div>
-          <div class="col-6" style="display: flex; justify-content: end; align-items: center;">
-            <button class="btn btn-sm btn-none h-50 mr-30 hidden-sm" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
-              <i class="fa-solid fa-user fa-xl text-secondary"></i>
-            </button>
-            <nz-dropdown-menu #menu="nzDropdownMenu">
-              <ul nz-menu>
-                <li nz-menu-item>Usuário: <strong>{{user}}</strong></li>
-                <li nz-menu-divider></li>
-                <li nz-menu-item>Perfil</li>
-                <li nz-menu-item>Empresa</li>
-                <li nz-menu-divider></li>
-                <li nz-menu-item (click)="logout()">Sair</li>
-              </ul>
-            </nz-dropdown-menu>
-          </div>
-        </div>
-      </div>
-    </nz-header>
-    <nz-content>
-      <div class="inner-content bg-dark">
-        <router-outlet></router-outlet>
-      </div>
-    </nz-content>
-  </nz-layout>
-</nz-layout>
-
-<ng-template #loginRedirect>
-  <div class="container-fluid login-container">
-    <app-login></app-login>
   </div>
-</ng-template>
+</nav>
+<div class="container-fluid" style="margin-top: 80px;">
+    <section id="about">
+        <div class="row">
+            <div class="col-12 w-100">
+                <div class="row w-100">
+                    <div class="col-xl-6 col-md-6 col-12 f-desk" style="padding-left: 10%;">
+                        <img src="../assets/img/logo-large.png" alt="" style="width: 40%;">
+                        <div class="row">
+                            <div class="col-12 w-100"><h2>Business Intelligence Tools</h2></div>
+                            <div class="col-12 text-home w-100 p-desk">
+                                <span>
+                                    A plataforma Bit - Business Intelligence Tools é projetada para pequenos empreendedores, pequenas empresas e profissionais autônomos.
+                                    Oferece ferramentas intuitivas de gestão de negócios, permitindo controle eficiente de finanças, vendas e operações. Com a Bit, os usuários
+                                    podem tomar decisões informadas, otimizar processos e impulsionar o crescimento de seus negócios de forma prática e acessível.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-md-6 col-12 no-app">
+                        <img src="../assets/img/about.gif" style="width: 90%;" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="tools">
+        <div class="row" style="margin-top: 80px;">
+            <div class="col-12 w-100">
+                <div class="row w-100 bg-image p-5">
+                  <div class="col-4 d-flex align-items-center justify-content-center">
+                    <div class="card shadow bg-tr text-light" style="width: 28rem;">
+                      <div class="card-body">
+                        <div class="row ">
+                          <div class="col-12 text-center">
+                            <span class="text-primary"><strong class="h5">FINANCEIRO</strong></span>
+                            <p>Contas a Pagar e Receber/Fluxo de Caixa/Planejamento</p>
+                          </div>
+                          <div class="col-12 d-flex justify-content-center">
+                            <img src="../assets/img/mold.png" style="width: 80%;" alt="">
+                          </div>
+                          <div class="col-12 d-flex justify-content-center">
+                            <button class="btn btn-primary"> Saiba mais...</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4 d-flex align-items-center justify-content-center">
+                    <div class="card shadow bg-tr text-light" style="width: 28rem;">
+                      <div class="card-body">
+                        <div class="row ">
+                          <div class="col-12 text-center">
+                            <span class="text-primary"><strong class="h5">VENDAS E SERVIÇOS</strong></span>
+                            <p>Pedidos de Vendas/Ordens de Serviço</p>
+                          </div>
+                          <div class="col-12 d-flex justify-content-center">
+                            <img src="../assets/img/mold.png" style="width: 80%;" alt="">
+                          </div>
+                          <div class="col-12 d-flex justify-content-center">
+                            <button class="btn btn-primary"> Saiba mais...</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4 d-flex align-items-center justify-content-center">
+                    <div class="card shadow bg-tr text-light" style="width: 28rem;">
+                      <div class="card-body">
+                        <div class="row ">
+                          <div class="col-12 text-center">
+                            <span class="text-primary"><strong class="h5">VENDAS E SERVIÇOS</strong></span>
+                            <p>Balanço/Estoque Mínimo/Pedido de Compra</p>
+                          </div>
+                          <div class="col-12 d-flex justify-content-center">
+                            <img src="../assets/img/mold.png" style="width: 80%;" alt="">
+                          </div>
+                          <div class="col-12 d-flex justify-content-center">
+                            <button class="btn btn-primary"> Saiba mais...</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="planos">
+        <div class="row" style="margin-top: 80px;">
+            <div class="col-12 w-100">
+                <div class="row w-100">
+                    <div class="col-xl-6 col-md-6 col-12 f-desk" style="padding-left: 10%;">
+                        <img src="../assets/img/logo-large.png" alt="" style="width: 40%;">
+                        <div class="row">
+                            <div class="col-12 w-100"><h2>Business Intelligence Tools</h2></div>
+                            <div class="col-12 text-home w-100 p-desk">
+                                <span>
+                                    A plataforma Bit - Business Intelligence Tools é projetada para pequenos empreendedores, pequenas empresas e profissionais autônomos.
+                                    Oferece ferramentas intuitivas de gestão de negócios, permitindo controle eficiente de finanças, vendas e operações. Com a Bit, os usuários
+                                    podem tomar decisões informadas, otimizar processos e impulsionar o crescimento de seus negócios de forma prática e acessível.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-md-6 col-12 no-app">
+                        <img src="../assets/img/about.gif" style="width: 90%;" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
