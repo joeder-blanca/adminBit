@@ -30,22 +30,22 @@ export class LoginComponent {
   submitForm(): void {
     const userName = this.validateForm.get('userName')!.value;
     const password = this.validateForm.get('password')!.value;
-    this.router.navigate(['/admin/index']);
-    // if (this.validateForm.valid) {
-    //   this.authService.login(userName, password)
-    //   .subscribe({
-    //     next: (v) => this.processarSucesso(v),
-    //     error: (e) => this.processarFalha(e),
-    //     complete: () => console.info('complete')
-    //   });
-    // } else {
-    //   Object.values(this.validateForm.controls).forEach(control => {
-    //     if (control.invalid) {
-    //       control.markAsDirty();
-    //       control.updateValueAndValidity({ onlySelf: true });
-    //     }
-    //   });
-    // }
+    //this.router.navigate(['/admin/index']);
+    if (this.validateForm.valid) {
+      this.authService.login(userName, password)
+      .subscribe({
+        next: (v) => this.processarSucesso(v),
+        error: (e) => this.processarFalha(e),
+        complete: () => console.info('complete')
+      });
+    } else {
+      Object.values(this.validateForm.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
   }
 
   processarSucesso(response: any) {
