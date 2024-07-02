@@ -2,7 +2,6 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import pt from '@angular/common/locales/pt';
 
@@ -19,8 +18,6 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
-
-import { LoginComponent } from './pages/login/login.component';
 
 import { AuthService } from './shared/services/auth.service';
 import { adminApiProvider } from './shared/services/admin.service';
@@ -41,6 +38,9 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdminAboutComponent } from './pages/servicos/admin-about/admin-about.component';
+import { LoginComponent } from './pages/login/login.component';
 
 
 registerLocaleData(pt);
@@ -48,10 +48,10 @@ registerLocaleData(pt);
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    ReceitaComponent,
     NovoFinanceiroComponent,
-    CadastroComponent
+    CadastroComponent,
+    AdminAboutComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +59,6 @@ registerLocaleData(pt);
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     IconsProviderModule,
     NzLayoutModule,
     NzMenuModule,
@@ -79,7 +78,9 @@ registerLocaleData(pt);
     NzInputNumberModule,
     NzCheckboxModule,
     NzRadioModule,
-    NzSpinModule
+    NzSpinModule,
+    BrowserAnimationsModule
+
   ],
   providers: [
     AuthService,

@@ -1,4 +1,9 @@
+import { AuthService } from '../../../shared/services/auth.service'
 import { Component } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { NzPlacementType } from 'ng-zorro-antd/dropdown';
+
 
 @Component({
   selector: 'app-index',
@@ -7,4 +12,5 @@ import { Component } from '@angular/core';
 })
 export class IndexComponent {
 
+ 
 }

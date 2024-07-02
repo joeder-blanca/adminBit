@@ -1,6 +1,8 @@
 import { AuthService } from './../../shared/services/auth.service';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -20,35 +22,36 @@ export class LoginComponent {
 
   constructor(
     private fb: NonNullableFormBuilder,
-    private authService : AuthService
+    private authService : AuthService,
+    private router: Router
   ) {}
 
 
   submitForm(): void {
     const userName = this.validateForm.get('userName')!.value;
     const password = this.validateForm.get('password')!.value;
-
-    if (this.validateForm.valid) {
-      this.authService.login(userName, password)
-      .subscribe({
-        next: (v) => this.processarSucesso(v),
-        error: (e) => this.processarFalha(e),
-        complete: () => console.info('complete')
-      });
-    } else {
-      Object.values(this.validateForm.controls).forEach(control => {
-        if (control.invalid) {
-          control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
-        }
-      });
-    }
+    this.router.navigate(['/admin/index']);
+    // if (this.validateForm.valid) {
+    //   this.authService.login(userName, password)
+    //   .subscribe({
+    //     next: (v) => this.processarSucesso(v),
+    //     error: (e) => this.processarFalha(e),
+    //     complete: () => console.info('complete')
+    //   });
+    // } else {
+    //   Object.values(this.validateForm.controls).forEach(control => {
+    //     if (control.invalid) {
+    //       control.markAsDirty();
+    //       control.updateValueAndValidity({ onlySelf: true });
+    //     }
+    //   });
+    // }
   }
 
   processarSucesso(response: any) {
     this.responseLogin = response;
     this.authService.LocalStorage.salvarDadosLocaisUsuario(response);
-    //fazer a api autenticar retornar os dados do usuario que precisam ser gravados
+    this.router.navigate(['/admin/home']);
 
   }
 
