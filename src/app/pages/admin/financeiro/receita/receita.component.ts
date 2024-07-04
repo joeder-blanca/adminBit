@@ -107,23 +107,22 @@ export class ReceitaComponent implements OnInit {
     .then(data => {
       this.listTotais = data;
       this.listTotais.forEach((entry: totaisModel) =>{
-        
+
         if(entry.tipo == "1"){
           totalReceitas += parseFloat(entry.total);
-        }        
+        }
       });
       this.vrReceitas = totalReceitas.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     })
   }
 
   obterFinanceiros() {
-
     this._adminApi.getFinanceiros()
       .then(data => {
         this.listFinanceiros = data.map((item: any) => new financeirosModel().mapFromApi(item));
                 const filteredFinanceiros = this.listFinanceiros.filter((entry: financeirosModel) => entry.tipo == '1');
-        
-        this.listFinanceiros = filteredFinanceiros; 
+
+        this.listFinanceiros = filteredFinanceiros;
       })
       .catch(error => {
         console.error('Erro ao obter financeiros:', error);
@@ -137,7 +136,7 @@ export class ReceitaComponent implements OnInit {
   formatMoeda(valor: any): string {
     return  valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
-  
+
 
   open(): void {
     this.visible = true;
@@ -167,7 +166,7 @@ export class ReceitaComponent implements OnInit {
     this.visibleMenu = false;
     this.visibleNovoFinanceiro = true;
   }
-  
+
   abrirMenu(){
     this.visibleMenu = true;
   }
@@ -181,6 +180,6 @@ export class ReceitaComponent implements OnInit {
     console.log('Button cancel clicked!');
     this.visibleMenu = false;
   }
-  
+
 
 }

@@ -3,7 +3,7 @@
 }
 
 .bg-success-light{
-  background-color: #1987542f;
+  background-color: #19875425;
 }
 
 .bg-danger-light{
@@ -21,7 +21,6 @@
 .bg-tr{
   background-color: #6265681c;
 }
-
 
 .text-right{
   text-align: right !important;
@@ -54,25 +53,6 @@
   z-index: 1000 !important;
 }
 
-.home{
-  display: flex;
-  justify-content: start;
-  margin-top: 50px;
-  margin-left: 20%;
-}
-
-.home-2{
-  margin-left: 20%;
-  padding-top: 1%;
-  display: flex;
-  align-items: start;
-  justify-content: start;
-}
-
-.text-home{
-  width: 80%;
-  text-align: justify;
-}
 
 .bg-image {
   background-image: url('./assets/img/wall.jpg');

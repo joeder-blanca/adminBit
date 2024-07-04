@@ -1,4 +1,4 @@
-<nz-layout class="app-layout" *ngIf="isAuthenticated(); else loginRedirect">
+<nz-layout *ngIf="isAuthenticated(); else loginRedirect">
   <nz-sider class="menu-sidebar hidden-sm"
             nzCollapsible
             nzWidth="256px"
@@ -6,28 +6,22 @@
             [(nzCollapsed)]="isCollapsed"
             [nzTrigger]="null">
     <div class="sidebar-logo b">
-      <a routerLink="/home">
+      <a routerLink="./index">
         <img *ngIf="!isCollapsed" src="assets/img/logo-light.png" style="width: 28%;" alt="logo">
         <img *ngIf="isCollapsed" src="assets/img/logo-light-sm.png" class="" alt="logo">
       </a>
     </div>
     <ul nz-menu class="bg-dark text-light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li  nz-submenu nzOpen nzTitle="Financeiro" nzIcon="dollar">
+      <li nz-submenu nzOpen nzTitle="Financeiro" nzIcon="dollar">
         <ul class="bg-dark">
-          <li nz-menu-item nzMatchRouter>
-            <a class="text-light" routerLink="/receitas">Receitas</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a class="text-light" routerLink="/despesas">Despesas</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a class="text-light" routerLink="/contas">Pagar/Receber</a>
+          <li *ngFor="let item of filteredMenuItems" nz-menu-item nzMatchRouter>
+            <a class="text-light" [routerLink]="item.link">{{ item.title }}</a>
           </li>
         </ul>
       </li>
     </ul>
   </nz-sider>
-  <nz-layout  class="bg-content">
+  <nz-layout class="bg-content">
     <nz-header>
       <div class="app-header bg-dark text-light">
         <div class="row">
@@ -58,16 +52,16 @@
       </div>
     </nz-header>
     <nz-content>
-      <div class="inner-content bg-dark">
+      <div class="bg-dark" style="height: 100%;">
         <router-outlet></router-outlet>
       </div>
     </nz-content>
   </nz-layout>
 </nz-layout>
 
+
 <ng-template #loginRedirect>
   <div class="container-fluid login-container">
     redirecionar para login
   </div>
 </ng-template>
-

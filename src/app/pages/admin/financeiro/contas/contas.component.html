@@ -1,0 +1,99 @@
+<!-- <nz-modal [(nzVisible)]="visibleMenu" nzTitle="Selecione um tipo de Receita" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzFooter]="null">
+  <ng-container *nzModalContent>
+    <div class="row" style="margin-top: 10px;">
+      <div class="col-6"><button class="btn btn-warning w-100 h-100" (click)="abrirNovoFinanceiro();"><i class="fa-solid fa-check"></i> SIMPLES</button></div>
+      <div class="col-6"><button class="btn btn-warning w-100 h-100"><i class="fa-solid fa-check-double"></i> COMPLETA</button></div>
+    </div>
+  </ng-container>
+</nz-modal> -->
+
+<div class="row">
+  <div class="col-12 hidden-sm"><span class="h2 text-light">Contas</span><p class="text-muted"><small>Pagar/Receber</small></p></div>
+  <div class="col-md-4 col-xl-12 col-6 mb-3 d-flex justify-content-end">
+    <div class="card shadow w-100 text-right h-100 bg-dark-light">
+      <div class="card-body">
+        <button class="btn btn-sm btn-info" ><i class="fa-solid fa-filter"></i> Filrar</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-xl-3 col-6 mb-3">
+    <div class="card shadow bg-dark-light">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col">
+            <p class="small text-light mb-0">Total</p>
+            <span class="h4 mb-0 text-light t-sm">R$ 9999000,00</span><br>
+          </div>
+          <div class="col-auto hidden-sm">
+            <i class="fa-solid fa-sack-dollar fa-2xl text-info"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-xl-3 col-6 mb-3">
+    <div class="card shadow bg-warning-light">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col">
+            <p class="small text-light mb-0">Receber Pendente</p>
+            <span class="h4 mb-0 text-light t-sm">R$ 99999999,99</span><br>
+          </div>
+          <div class="col-auto hidden-sm">
+            <i class="fa-solid fa-sack-dollar fa-2xl text-warning"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-xl-3 col-6 mb-3">
+    <div class="card shadow bg-danger-light">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col">
+            <p class="small text-light mb-0">Pagar Pendente</p>
+            <span class="h4 mb-0 text-light t-sm">R$ 99999999,99</span><br>
+          </div>
+          <div class="col-auto hidden-sm">
+            <i class="fa-solid fa-sack-dollar fa-2xl text-danger"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-xl-3 col-6 mb-3">
+    <div class="card shadow bg-info-light">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col">
+            <p class="small text-light mb-0">Saldo Pendente</p>
+            <span class="h4 mb-0 text-light t-sm">R$ 99999999,99</span><br>
+          </div>
+          <div class="col-auto hidden-sm">
+            <i class="fa-solid fa-sack-dollar fa-2xl text-info"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 hidden-sm"><hr class="text-muted"></div>
+  <div class="col-12">
+    <div class="row">
+      <div class="col-md-12 col-xl-12 col-12 mb-3">
+        <div class="card shadow bg-dark-light">
+          <div class="card-body ">
+            <div class="row align-items-center">
+              <div class="col">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="col-12">
+      <div id="slide-content"></div>
+  </div> -->
+</div>
+<!-- <app-novo-financeiro [status]="visibleNovoFinanceiro" [idTipo]="1" (statusChange)="visibleNovoFinanceiro = $event"></app-novo-financeiro> -->

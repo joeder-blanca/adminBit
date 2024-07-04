@@ -35,8 +35,6 @@ export class adminApiProvider {
       url = url.replace("{idUser}", this._idUser);
       url = url.replace("{idEmpresa}", this._idEmpresa);
 
-
-
       return new Promise((resolve, reject) => {
         this.httpClient.get(url,true,false).then((response : any) => {
           let totais: totaisModel[] = [];
@@ -47,7 +45,6 @@ export class adminApiProvider {
               totais.push(new totaisModel().mapFromApi(item));
             }
           }
-
           resolve(totais);
         }, (err) => {
           reject(err);
@@ -115,7 +112,7 @@ export class adminApiProvider {
         })
       })
 
-      
+
     }
 
     public getContas(): Promise<contasModel[]>{
@@ -146,7 +143,7 @@ export class adminApiProvider {
         })
       })
 
-      
+
     }
 
     public getCategorias(): Promise<categoriasModel[]>{
@@ -177,7 +174,7 @@ export class adminApiProvider {
         })
       })
 
-      
+
     }
 
     public getMetodo(): Promise<metodoModel[]>{
@@ -208,7 +205,7 @@ export class adminApiProvider {
         })
       })
 
-      
+
     }
 
     public getPgto(): Promise<pgtoModel[]>{
@@ -239,12 +236,12 @@ export class adminApiProvider {
         })
       })
 
-      
+
     }
 
     public postFinanceiro(item: any): Promise<void>{
       let url = this.apiService.urlPostFinanceiros;
-    
+
       return new Promise((resolve, reject) => {
         this.httpClient.post(url, item, true, false)
           .then((response: any) => {
@@ -259,6 +256,6 @@ export class adminApiProvider {
           });
       });
     }
-    
+
 }
 

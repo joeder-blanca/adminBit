@@ -5,6 +5,32 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+::ng-deep .ant-modal {
+  background-color: #212529 !important;
+  color: #fff;
+} *
+
+
+::ng-deep .ant-modal-footer {
+  background-color: #212529 !important;
+  color: #fff !important;
+}
+
+::ng-deep .ant-modal-body{
+  background-color: #212529 !important;
+  color: #fff !important;
+}
+
+::ng-deep .ant-modal-title{
+  background-color: #212529 !important;
+  color: #fff !important;
+}
+
+::ng-deep .ant-modal-header{
+  background-color: #212529 !important;
+  color: #fff !important;
+}
+
 ::ng-deep .ant-menu-sub.ant-menu-inline {
   background-color: #212529;
 }
@@ -21,14 +47,13 @@
   background-color: #188fff21 !important;
 }
 
-.app-layout {
-  height: 100vh;
+nz-layout{
+  max-height: 100%;
 }
 
 .menu-sidebar {
-  position: relative;
   z-index: 10;
-  min-height: 100vh;
+  height: 100vh;
   box-shadow: 2px 0 6px rgba(0,21,41,.35);
   background-color: #212529;
 }
@@ -74,7 +99,7 @@
 
 nz-header {
   padding: 0;
-  width: 100%;
+  width: 99%;
   z-index: 2;
 }
 
@@ -88,12 +113,6 @@ nz-header {
 
 nz-content {
   margin: 24px;
-}
-
-.inner-content {
-  padding: 24px;
-  background: #fff;
-  height: 100%;
 }
 
 .mt-10{
@@ -161,15 +180,4 @@ nz-content {
 }
 
 
-::ng-deep .ant-modal {
-  background-color: #212529 !important;
-  color: #fff;
-} */
 
-::ng-deep .ant-modal-header,
-::ng-deep .ant-modal-title,
-::ng-deep .ant-modal-body,
-::ng-deep .ant-modal-footer {
-  background-color: #212529 !important;
-  color: #fff;
-}

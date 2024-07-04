@@ -25,14 +25,17 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { IconsProviderModule } from 'src/app/icons-provider.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IndexComponent } from './index/index.component';
-import { ReceitaComponent } from '../financeiro/receita/receita.component';
-
+import { ReceitaComponent } from './financeiro/receita/receita.component';
+import { DespesaComponent } from './financeiro/despesa/despesa.component';
+import { ContasComponent } from './financeiro/contas/contas.component';
 
 @NgModule({
   declarations: [
     AdminAppComponent,
     IndexComponent,
-    ReceitaComponent
+    ReceitaComponent,
+    DespesaComponent,
+    ContasComponent,
   ],
   imports: [
     CommonModule,

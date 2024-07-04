@@ -23,13 +23,11 @@ import { AuthService } from './shared/services/auth.service';
 import { adminApiProvider } from './shared/services/admin.service';
 import { httpClient } from 'src/core/httpClient';
 import { BaseService } from './shared/services/base.service';
-import { ReceitaComponent } from './pages/financeiro/receita/receita.component';
 
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzModalModule } from 'ng-zorro-antd/modal';
-import { NovoFinanceiroComponent } from './pages/financeiro/components/novo-financeiro/novo-financeiro.component';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
@@ -48,7 +46,6 @@ registerLocaleData(pt);
 @NgModule({
   declarations: [
     AppComponent,
-    NovoFinanceiroComponent,
     CadastroComponent,
     AdminAboutComponent,
     LoginComponent

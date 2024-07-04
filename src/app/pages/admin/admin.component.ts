@@ -4,13 +4,31 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzPlacementType } from 'ng-zorro-antd/dropdown';
 
+interface MenuItem {
+  title: string;
+  link: string;
+  claim: string;
+}
+
+
 @Component({
   selector: 'admin-app-root',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
 export class AdminAppComponent {
-  isCollapsed = false;
+
+  menuItems: MenuItem[] = [
+    { title: 'Receitas', link: './receitas', claim: 'STANDARD' },
+    { title: 'Despesas', link: './despesas', claim: 'STANDARD' },
+    { title: 'Pagar/Receber', link: './contas', claim: 'STANDARD' },
+    { title: 'Fluxo de Caixa', link: '/fluxo', claim: 'STANDARD' },
+    { title: 'Planejamento', link: '/planejamento', claim: 'STANDARD' }
+  ];
+
+  filteredMenuItems: MenuItem[] = [];
+  _user: any = {};
+  isCollapsed = true;
   user: string = '';
 
   constructor(
@@ -19,12 +37,21 @@ export class AdminAppComponent {
   ) { }
 
   ngOnInit(): void {
-    const userJson = localStorage.getItem('bitADMIN.user');
-    if (userJson) {
-      const user = JSON.parse(userJson);
-      this.user = user.username;
-    } else {
-      console.error('Usuário não encontrado');
+    this.obtemClaims();
+  }
+
+  obtemClaims() {
+    const user = localStorage.getItem('bitADMIN.user');
+    if (user) {
+      this._user = JSON.parse(user);
+
+      if (Array.isArray(this._user.usuarioToken.claims)) {
+        const standardRoles = this._user.usuarioToken.claims.some((claim: any) => claim.type === 'role' && claim.value === 'STANDARD');
+
+        if (standardRoles) {
+          this.filteredMenuItems = this.menuItems.filter(item => item.claim === 'STANDARD');
+        }
+      }
     }
   }
 
