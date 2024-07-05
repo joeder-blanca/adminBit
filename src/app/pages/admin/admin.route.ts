@@ -5,6 +5,7 @@ import { IndexComponent } from './index/index.component';
 import { ReceitaComponent } from './financeiro/receita/receita.component';
 import { DespesaComponent } from './financeiro/despesa/despesa.component';
 import { ContasComponent } from './financeiro/contas/contas.component';
+import { FluxoComponent } from './financeiro/fluxo/fluxo.component';
 
 const AdminRoutingConfig: Routes = [
   {
@@ -13,7 +14,8 @@ const AdminRoutingConfig: Routes = [
     { path: 'index', component: IndexComponent},
     { path: 'receitas', component: ReceitaComponent},
     { path: 'despesas', component: DespesaComponent},
-    {path: 'contas', component: ContasComponent}
+    { path: 'contas', component: ContasComponent},
+    { path: 'fluxo', component: FluxoComponent}
     ]
   },
 ];

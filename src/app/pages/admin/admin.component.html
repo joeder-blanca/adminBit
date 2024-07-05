@@ -25,7 +25,7 @@
     <nz-header>
       <div class="app-header bg-dark text-light">
         <div class="row">
-          <div class="col-6">
+          <div class="col-6 hidden-sm">
             <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
               <span class="trigger"
                  nz-icon
@@ -33,8 +33,18 @@
               ></span>
           </span>
           </div>
+          <div class="col-6 view-sm" style="display: flex; justify-content: star; align-items: center;">
+            <button class="btn btn-sm btn-none h-50 ml-30" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+              <i class="fa-solid fa-bars fa-xl text-secondary"></i>
+            </button>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+              <ul nz-menu>
+                <li nz-menu-divider> usar drawer</li>
+              </ul>
+            </nz-dropdown-menu>
+          </div>
           <div class="col-6" style="display: flex; justify-content: end; align-items: center;">
-            <button class="btn btn-sm btn-none h-50 mr-30 hidden-sm" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+            <button class="btn btn-sm btn-none h-50 mr-30" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
               <i class="fa-solid fa-user fa-xl text-secondary"></i>
             </button>
             <nz-dropdown-menu #menu="nzDropdownMenu">
