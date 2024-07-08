@@ -47,17 +47,34 @@
   text-align: left !important;
 }
 
+.text-justify{
+  text-align: justify !important;
+}
+
+.d-center{
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.d-start{
+  display: flex !important;
+  justify-content: start !important;
+  align-items: center !important;
+
+}
+
 @media (max-width: 768px) {
   .hidden-sm {
     display: none !important;
   }
 
   .t-sml{
-    font-size: smaller;
+    font-size: smaller !important;
   }
 
   .t-sm{
-    font-size: small;
+    font-size: small !important;
   }
 }
 
@@ -66,13 +83,6 @@
     display: none !important;
   }
 
-  .t-sml{
-    font-size: smaller;
-  }
-
-  .t-sm{
-    font-size: small;
-  }
 }
 
 @media (min-width: 768px) {
@@ -98,21 +108,6 @@
   width: 100%;
 }
 
-/* --apenas para monitores maiores */
-@media (min-width: 768px) {
-  .f-desk{
-    display: flex;
-    justify-content: start;
-    flex-direction:column;
-  }
-}
-
-/* --apenas para monitores menores */
-@media (max-width: 767px) {
-  .no-app{
-    display: none !important;
-  }
-}
 
 .animated-card {
   opacity: 0;
