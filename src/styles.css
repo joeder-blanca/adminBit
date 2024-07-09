@@ -76,6 +76,10 @@
   .t-sm{
     font-size: small !important;
   }
+
+  .img-avatar{
+    max-width: 100px;
+}
 }
 
 @media (min-width: 768px) {
@@ -83,13 +87,17 @@
     display: none !important;
   }
 
-}
-
-@media (min-width: 768px) {
   .h-lg{
     height: 300px !important;
   }
+
+    .img-avatar{
+      max-width: 150px;
+  }
+
 }
+
+
 
 .spinner-container {
   position: fixed !important;
@@ -150,4 +158,72 @@
   background-color: white; /* Para evitar que o conteúdo se sobreponha */
   z-index: 9999;
   border-right: 1px solid #ddd; /* Opcional: adicionar uma borda direita para destacar a coluna fixa */
+}
+
+mt-10{
+  margin-top: 10px;
+}
+
+.mt-20{
+  margin-top: 20px;
+}
+
+.mt-30{
+  margin-top: 30px;
+}
+
+.mt-40{
+  margin-top: 40px;
+}
+
+.mt-50{
+  margin-top: 50px;
+}
+
+.m-10{
+  margin: 10px;
+}
+
+.m-20{
+  margin: 20px;
+}
+
+.m-30{
+  margin: 30px;
+}
+
+.m-40{
+  margin: 40px;
+}
+
+.m-50{
+  margin: 50px;
+}
+
+.mr-10{
+  margin-right: 10px !important;
+}
+
+.mr-20{
+  margin-right: 20px;
+}
+
+.mr-30{
+  margin-right: 30px;
+}
+
+.mr-40{
+  margin-right: 40px;
+}
+
+.mr-50{
+  margin-right: 50px;
+}
+
+.ml-30{
+  margin-left: 30px;
+}
+
+.mb-10{
+  margin-bottom: 10px;
 }

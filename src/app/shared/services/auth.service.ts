@@ -48,12 +48,12 @@ export class AuthService extends BaseService {
     let _password = password;
 
     let json = `{
-      "userName": "${_username}",
+      "user": "${_username}",
       "password": "${_password}"
     }`;
 
     let response = this.http
-      .post(this.UrlServiceLoginV1 + '/Auth/login', json, this.ObterHeaderJson())
+      .post(this.UrlServiceLoginV1 + 'auth/token.php', json, this.ObterHeaderJson())
       .pipe(
           map(this.extractData),
           catchError(this.serviceError));

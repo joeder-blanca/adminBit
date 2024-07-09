@@ -28,8 +28,8 @@ export class LocalStorageUtils {
 
   public salvarUsuario(response: any) {
     this.usuario.id = response.usuarioToken.id;
-    this.usuario.id_empresa = response.usuarioToken.id_empresa;
-    this.usuario.username = response.usuarioToken.username;
+    this.usuario.id_empresa = response.usuarioToken.idEmpresa;
+    this.usuario.username = response.usuarioToken.userName;
     this.usuario.claims = response.usuarioToken.claims;
 
     localStorage.setItem('bitADMIN.user', JSON.stringify(this.usuario));

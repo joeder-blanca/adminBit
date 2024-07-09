@@ -29,6 +29,7 @@ import { ReceitaComponent } from './financeiro/receita/receita.component';
 import { DespesaComponent } from './financeiro/despesa/despesa.component';
 import { ContasComponent } from './financeiro/contas/contas.component';
 import { FluxoComponent } from './financeiro/fluxo/fluxo.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { FluxoComponent } from './financeiro/fluxo/fluxo.component';
     DespesaComponent,
     ContasComponent,
     FluxoComponent,
+    ProfileComponent,
   ],
   imports: [
     CommonModule,

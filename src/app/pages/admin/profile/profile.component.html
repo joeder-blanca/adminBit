@@ -1,0 +1,99 @@
+<div class="row">
+    <div class="col-12 hidden-sm"><span class="h2 text-light">Perfil</span></div>
+    <div class="col-xl-12 col-md-12 col-sm-12 col-12 mb-3">
+      <div class="card shadow bg-dark-light">
+        <div class="card-body text-light">
+            <div class="row">
+                <div class="col-xl-3 col-md-3 col-sm-12 col-12">
+                    <img
+                     src="{{urlImagem}}" 
+                     alt="foto de perfil" 
+                     class="img-avatar rounded-circle">
+                  </div>
+                <div class="col-xl-9 col-md-9 col-sm-12 col-12">
+                    <div class="row">
+                        <div class="col-xl-8 col-md-8 col-sm-12 col-12">
+                            <span class="h5">Joeder Blanca</span><br>
+                            <span class="text-muted">Analista de Sistemas</span><br>
+                            <p class="text-muted text-justify">
+                              Experiência em desenvolvimento de software, análise de sistemas, e gestão de projetos. Habilidades em Angular, PHP, MySQL e um forte entendimento das melhores práticas em TI.
+                            </p>
+                          </div>                          
+                        <div class="xol-xl-4 col-md-4 col-sm-12 col-12 text-muted">
+                            <span class="text-light"><strong>Ituverava - SP</strong></span><br>
+                            <span>joeblanca@hotmail.com</span><br>
+                            <span>16 988766522</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 d-flex justify-content-end mb-3">
+      <button *ngIf="!editMode" class="btn btn-sm btn-primary" (click)="editarProfile()"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
+      <button *ngIf="editMode" class="btn btn-sm btn-success" (click)="submitForm()"><i class="fa-solid fa-floppy-disk"></i> Salvar</button>
+    </div>
+    <div class="col-12" *ngIf="editMode">
+      <form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+        <div class="row">
+          <hr class="text-muted">
+          <div class="col-xl-4 col-md-4 col-sm-6 col-12">
+            <div class="mb-3">
+              <label for="nickname" class="form-label text-light">Apelido</label><small class="text-muted"> | Como gostaria de ser chamado?</small>
+              <input type="text" class="form-control" id="nickname" formControlName="nickname" [disabled]="!editMode">
+              <div *ngIf="validateForm.get('nickname')?.invalid && validateForm.get('nickname')?.touched" class="text-danger">
+                Por favor, insira seu apelido!
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-4 col-sm-9 col-9">
+            <div class="mb-3">
+              <label for="nome" class="form-label text-light">Nome Completo</label>
+              <input type="text" class="form-control" id="nome" formControlName="nome" [disabled]="!editMode">
+              <div *ngIf="validateForm.get('nome')?.invalid && validateForm.get('nome')?.touched" class="text-danger">
+                Por favor, insira seu nome!
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-4 col-sm-3 col-3">
+            <div class="mb-3">
+              <label for="idade" class="form-label text-light">Idade</label>
+              <input type="text" class="form-control" id="idade" formControlName="idade" [disabled]="!editMode">
+              <div *ngIf="validateForm.get('idade')?.invalid && validateForm.get('idade')?.touched" class="text-danger">
+                Por favor, insira sua idade!
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-4 col-sm-6 col-12">
+            <div class="mb-3">
+              <label for="email" class="form-label text-light">E-mail</label>
+              <input type="email" class="form-control" id="email" formControlName="email" [disabled]="!editMode">
+              <div *ngIf="validateForm.get('email')?.invalid && validateForm.get('email')?.touched" class="text-danger">
+                E-mail inválido!
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-4 col-sm-6 col-6">
+            <div class="mb-3">
+              <label for="estado" class="form-label text-light">Estado</label>
+              <select class="form-control" id="estado" formControlName="estado" [disabled]="!editMode">
+                <option *ngFor="let estado of estados" [value]="estado.sigla">{{ estado.nome }}</option>
+              </select>
+              <div *ngIf="validateForm.get('estado')?.invalid && validateForm.get('estado')?.touched" class="text-danger">
+                Por favor, selecione seu estado!
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-4 col-sm-6 col-6">
+            <div class="mb-3">
+              <label for="cidade" class="form-label text-light">Cidade</label>
+              <input type="text" class="form-control" id="cidade" formControlName="cidade" [disabled]="!editMode">
+              <div *ngIf="validateForm.get('cidade')?.invalid && validateForm.get('cidade')?.touched" class="text-danger">
+                Por favor, insira sua cidade!
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>

@@ -30,45 +30,45 @@ export class LoginComponent {
   submitForm(): void {
     const userName = this.validateForm.get('userName')!.value;
     const password = this.validateForm.get('password')!.value;
-    const usuario: any = {
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
-      "usuarioToken": {
-        "id": 123,
-        "id_empresa": 456,
-        "username": "johndoe",
-        "claims": [
-          { "type": "role", "value": "STANDARD" },
-          { "type": "permission", "value": "read" },
-          { "type": "permission", "value": "write" }
-        ]
-      }
-    };
+    // const usuario: any = {
+    //   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
+    //   "usuarioToken": {
+    //     "id": 123,
+    //     "id_empresa": 456,
+    //     "username": "johndoe",
+    //     "claims": [
+    //       { "type": "role", "value": "STANDARD" },
+    //       { "type": "permission", "value": "read" },
+    //       { "type": "permission", "value": "write" }
+    //     ]
+    //   }
+    // };
 
-    localStorage.setItem('bitADMIN.user', JSON.stringify(usuario));
+    // localStorage.setItem('bitADMIN.user', JSON.stringify(usuario));
 
-    this.router.navigate(['/admin/index']);
+    // this.router.navigate(['/admin/index']);
 
-    // if (this.validateForm.valid) {
-    //   this.authService.login(userName, password)
-    //   .subscribe({
-    //     next: (v) => this.processarSucesso(v),
-    //     error: (e) => this.processarFalha(e),
-    //     complete: () => console.info('complete')
-    //   });
-    // } else {
-    //   Object.values(this.validateForm.controls).forEach(control => {
-    //     if (control.invalid) {
-    //       control.markAsDirty();
-    //       control.updateValueAndValidity({ onlySelf: true });
-    //     }
-    //   });
-    // }
+    if (this.validateForm.valid) {
+      this.authService.login(userName, password)
+      .subscribe({
+        next: (v) => this.processarSucesso(v),
+        error: (e) => this.processarFalha(e),
+        complete: () => console.info('complete')
+      });
+    } else {
+      Object.values(this.validateForm.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
   }
 
   processarSucesso(response: any) {
     this.responseLogin = response;
     this.authService.LocalStorage.salvarDadosLocaisUsuario(response);
-    this.router.navigate(['/admin/home']);
+    this.router.navigate(['/admin/index']);
 
   }
 

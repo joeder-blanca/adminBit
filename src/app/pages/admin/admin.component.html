@@ -1,4 +1,4 @@
-<nz-layout *ngIf="isAuthenticated(); else loginRedirect">
+<nz-layout *ngIf="isAuthenticated()">
   <nz-sider class="menu-sidebar hidden-sm"
             nzCollapsible
             nzWidth="256px"
@@ -44,9 +44,9 @@
             </button>
             <nz-dropdown-menu #menu="nzDropdownMenu">
               <ul nz-menu>
-                <li nz-menu-item>Usuário: <strong>{{user}}</strong></li>
+                <li nz-menu-item>Usuário: <strong>{{userLabel}}</strong></li>
                 <li nz-menu-divider></li>
-                <li nz-menu-item>Perfil</li>
+                <li nz-menu-item routerLink="./profile">Perfil</li>
                 <li nz-menu-item>Empresa</li>
                 <li nz-menu-divider></li>
                 <li nz-menu-item (click)="logout()">Sair</li>
@@ -63,10 +63,3 @@
     </nz-content>
   </nz-layout>
 </nz-layout>
-
-
-<ng-template #loginRedirect>
-  <div class="container-fluid login-container">
-    redirecionar para login
-  </div>
-</ng-template>

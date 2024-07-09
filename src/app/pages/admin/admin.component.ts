@@ -29,7 +29,7 @@ export class AdminAppComponent {
   filteredMenuItems: MenuItem[] = [];
   _user: any = {};
   isCollapsed = true;
-  user: string = '';
+  userLabel: string = '';
 
   constructor(
     private router: Router,
@@ -42,21 +42,31 @@ export class AdminAppComponent {
 
   obtemClaims() {
     const user = localStorage.getItem('bitADMIN.user');
+    
     if (user) {
       this._user = JSON.parse(user);
 
-      if (Array.isArray(this._user.usuarioToken.claims)) {
-        const standardRoles = this._user.usuarioToken.claims.some((claim: any) => claim.type === 'role' && claim.value === 'STANDARD');
-
+      if (this._user && Array.isArray(this._user.claims)) {
+        this.userLabel = this._user.username;
+        const standardRoles = this._user.claims.some((claim: any) => claim.type === 'role' && claim.value === 'STANDARD');
+  
         if (standardRoles) {
           this.filteredMenuItems = this.menuItems.filter(item => item.claim === 'STANDARD');
         }
+      } else {
+        console.error('Estrutura do token de usuário inválida:', this._user);
       }
+    } else {
+      console.error('Usuário não encontrado no localStorage');
     }
   }
+  
 
   isAuthenticated(): boolean {
-    //return this.authService.loggedIn;
+    if (!this.authService.loggedIn) {
+      this.router.navigate(['/admin-about']);
+      return false;
+    }
     return true;
   }
 
