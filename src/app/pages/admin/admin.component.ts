@@ -63,10 +63,10 @@ export class AdminAppComponent {
   
 
   isAuthenticated(): boolean {
-    if (!this.authService.loggedIn) {
-      this.router.navigate(['/admin-about']);
-      return false;
-    }
+    // if (!this.authService.loggedIn) {
+    //   this.router.navigate(['/admin-about']);
+    //   return false;
+    // }
     return true;
   }
 

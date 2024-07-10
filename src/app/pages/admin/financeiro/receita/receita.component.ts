@@ -41,6 +41,8 @@ export class ReceitaComponent implements OnInit {
   searchForm!: FormGroup;
   periodoFiltro: string = 'Mês: Junho'
 
+
+
   vrReceitas: string = '';
 
   listTotais:any = [];

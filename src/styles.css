@@ -69,6 +69,14 @@
     display: none !important;
   }
 
+  .h2{
+    font-size: medium !important;
+  }
+
+  .t-smlx{
+    font-size: xx-small !important;
+  }
+
   .t-sml{
     font-size: smaller !important;
   }

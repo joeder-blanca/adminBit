@@ -28,10 +28,19 @@ export class NovoFinanceiroComponent {
   tituloModal!: string;
 
   //listas
-  listPessoas: any = [];
+  listPessoas: any = [    
+    { id: '1', nome: 'João' },
+    { id: '2', nome: 'Maria' },
+    { id: '3', nome: 'Carlos' }
+  ];
+  
   listContas: any = [];
   listCategorias: any = [];
   listMetodo: any = [];
+
+
+
+  selectedValue = null;
 
   financeiroForm: FormGroup;
 
