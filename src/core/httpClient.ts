@@ -27,7 +27,7 @@ export class httpClient {
     let language = 'BR';
 
     let token: any = 'Bearer ' + localStorage.getItem('bitADMIN.token');
-
+    
     if (language !== null && language !== undefined) {
       headers = headers.append('Accept-Language', language);
     }

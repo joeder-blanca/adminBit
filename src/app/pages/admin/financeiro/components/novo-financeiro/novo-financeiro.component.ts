@@ -47,7 +47,7 @@ export class NovoFinanceiroComponent {
   constructor(
     private _fb: FormBuilder,
     private _breakpointObserver: BreakpointObserver,
-    public _adminApin: adminApiProvider
+    public _adminApi: adminApiProvider
   ) {
     const dtIncFormatted = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
     this.financeiroForm = this._fb.group({
@@ -89,7 +89,7 @@ export class NovoFinanceiroComponent {
 
   //chamadas
   obterPessoas(): void {
-    this._adminApin.getPessoas().then((data) => {
+    this._adminApi.getPessoas().then((data) => {
       this.listPessoas = data.map((item: any) =>
         new pessoasModel().mapFromApi(item)
       );
@@ -101,7 +101,7 @@ export class NovoFinanceiroComponent {
   }
 
   obterContas(): void {
-    this._adminApin.getContas().then((data) => {
+    this._adminApi.getContas().then((data) => {
       this.listContas = data.map((item: any) =>
         new contasModel().mapFromApi(item)
       );
@@ -113,7 +113,7 @@ export class NovoFinanceiroComponent {
   }
 
   obterCategorias(): void {
-    this._adminApin.getCategorias().then((data) => {
+    this._adminApi.getCategorias().then((data) => {
       this.listCategorias = data.map((item: any) =>
         new categoriasModel().mapFromApi(item)
       );
@@ -125,7 +125,7 @@ export class NovoFinanceiroComponent {
   }
 
   obterMetodo(): void {
-    this._adminApin.getMetodo().then((data) => {
+    this._adminApi.getMetodo().then((data) => {
       this.listMetodo = data.map((item: any) =>
         new metodoModel().mapFromApi(item)
       );
@@ -180,7 +180,7 @@ async novoFinanceiro(tipo: number): Promise<void> {
     };
 
     
-      await this._adminApin.postFinanceiro(formattedValues).then(success =>{
+      await this._adminApi.postFinanceiro(formattedValues).then(success =>{
         console.log('ok');
       }).catch(error =>{
         console.log("Erro na chamada postOs, response: " + error)

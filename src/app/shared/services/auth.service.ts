@@ -21,7 +21,6 @@ export class AuthService extends BaseService {
   get loggedIn(): boolean {
 
     var usuarioLogado = this.localStorageUtils.obterUsuario();
-
     if (usuarioLogado) {
       var username = usuarioLogado.username
       this._user = { username };

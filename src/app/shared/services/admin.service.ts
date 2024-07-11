@@ -9,6 +9,7 @@ import { contasModel } from '../models/contas.model';
 import { categoriasModel } from '../models/categorias.model';
 import { pgtoModel } from '../models/fPgto.model';
 import { metodoModel } from '../models/metodo.model';
+import { profileModel } from '../models/profile.model';
 
 @Injectable()
 export class adminApiProvider {
@@ -20,6 +21,40 @@ export class adminApiProvider {
         public httpClient: httpClient,
         public apiService: BaseService
     ) { }
+
+    public getProfile(): Promise<any> {
+      const userJson = localStorage.getItem('bitADMIN.user');
+      if (!userJson) {
+          console.error('Usuário não encontrado');
+          return Promise.reject('Usuário não encontrado');
+      }
+  
+      const user = JSON.parse(userJson);
+      this._idUser = user.id;
+      this._idEmpresa = user.id_empresa;
+  
+      let url = this.apiService.urlGetProfile;
+      url = url.replace("{UserId}", this._idUser);
+      url = url.replace("{EmpresaId}", this._idEmpresa);
+  
+      return this.httpClient.get(url, true, false)
+          .then((response: any) => {
+
+              if (response && typeof response === 'object') {
+                  return response;  
+              } else {
+                  console.error('Resposta inválida da API:', response);
+                  return Promise.reject('Resposta inválida da API');
+              }
+          })
+          .catch((err) => {
+              console.error('Erro ao obter perfil:', err);
+              return Promise.reject(err);
+          });
+  }
+  
+  
+
 
     public getTotais(): Promise<totaisModel[]>{
       const userJson = localStorage.getItem('bitADMIN.user');
@@ -204,8 +239,6 @@ export class adminApiProvider {
           reject(err);
         })
       })
-
-
     }
 
     public getPgto(): Promise<pgtoModel[]>{

@@ -13,7 +13,7 @@ export class LocalStorageUtils {
 
 
   public salvarDadosLocaisUsuario(response: any) {
-    this.salvarTokenUsuario(response.accessToken);
+    this.salvarTokenUsuario(response.access_token);
     this.salvarUsuario(response);
   }
 

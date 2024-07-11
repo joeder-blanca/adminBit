@@ -26,6 +26,7 @@ export  class BaseService{
     protected UrlServiceLoginV1: string = environment.apiUrlLoginv1;
 
     //url metodo get
+    public urlGetProfile = `${this.UrlServiceV1}/user/profile.php?UserId={UserId}&EmpresaId={EmpresaId}`
     public urlGetTotais = `${this.UrlServiceV1}/totais/getTotaisPeriodo.php?idUser={idUser}&idEmpresa={idEmpresa}`;
     public urlGetFinanceiros = `${this.UrlServiceV1}/Financeiro/getFinanceiro.php?idUser={idUser}&idEmpresa={idEmpresa}`;
     public urlGetPessoas = `${this.UrlServiceV1}/listas/getListas.php?tabela=pessoa&idEmpresa={idEmpresa}`;

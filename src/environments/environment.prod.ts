@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   apiUrlLoginv1: 'http://192.168.0.109/bit/adminAPI-php/model/',
-  apiUrlv1: 'http://localhost:5129/',
+  apiUrlv1: 'http://192.168.0.109/bit/adminAPI-php/model',
   defaultLanguage: 'pt-BR',
   supportedLanguages: [
     'pt-BR'

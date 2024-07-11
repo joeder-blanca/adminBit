@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { profileModel } from 'src/app/shared/models/profile.model';
+import { adminApiProvider } from 'src/app/shared/services/admin.service';
+
 
 @Component({
   selector: 'app-profile',
@@ -9,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ProfileComponent implements OnInit {
   urlImagem: string = 'https://media.licdn.com/dms/image/D4D03AQEpOx944Ustyw/profile-displayphoto-shrink_200_200/0/1718037918163?e=2147483647&v=beta&t=svQGr4iu5fsMEQsEClGbTuAh_a-KUq6_mnN0r2JoZJg';
   validateForm!: FormGroup;
-  editMode: boolean = true;
+  editMode: boolean = false;
   
   // Dados fictícios
   mockData = {
@@ -20,6 +23,8 @@ export class ProfileComponent implements OnInit {
     estado: "SP",
     cidade: "São Paulo"
   };
+
+  profileData: any = [];
 
   // Lista de estados do Brasil
   estados = [
@@ -52,18 +57,38 @@ export class ProfileComponent implements OnInit {
     { sigla: 'TO', nome: 'Tocantins' }
   ];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    public _adminApi: adminApiProvider
+  ) {}
 
   ngOnInit(): void {
-    this.validateForm = this.fb.group({
-      nickname: [{ value: this.mockData.nickname, disabled: !this.editMode }, [Validators.required]],
-      nome: [{ value: this.mockData.nome, disabled: !this.editMode }, [Validators.required]],
-      idade: [{ value: this.mockData.idade, disabled: !this.editMode }, [Validators.required]],
-      email: [{ value: this.mockData.email, disabled: !this.editMode }, [Validators.required, Validators.email]],
-      estado: [{ value: this.mockData.estado, disabled: !this.editMode }, [Validators.required]],
-      cidade: [{ value: this.mockData.cidade, disabled: !this.editMode }, [Validators.required]]
-    });
+    this.obtemPerfil();
   }
+
+  obtemPerfil() {
+    this._adminApi.getProfile().then((profile) => {
+        if (profile) {
+            // Configurar os dados do formulário
+            this.validateForm = this.fb.group({
+                nickname: [{ value: profile.UserName, disabled: !this.editMode }, [Validators.required]],
+                nome: [{ value: profile.Nome, disabled: !this.editMode }, [Validators.required]],
+                idade: [{ value: profile.Idade, disabled: !this.editMode }, [Validators.required]],
+                email: [{ value: profile.Email, disabled: !this.editMode }, [Validators.required, Validators.email]],
+                estado: [{ value: profile.Estado, disabled: !this.editMode }, [Validators.required]],
+                cidade: [{ value: profile.Cidade, disabled: !this.editMode }, [Validators.required]]
+            });
+        } else {
+            console.error('No profile data found');
+        }
+    }).catch((err) => {
+        console.error('Error fetching profile:', err);
+    });
+}
+
+
+
+
 
   submitForm(): void {
     if (this.validateForm.valid) {
