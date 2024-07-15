@@ -1,18 +1,19 @@
+
 export class pgtoModel {
-    public id!: number;
-    public id_empresa!: number;
-    public id_pessoa_inc!: number;
-    public dt_inc!: Date;
-    public nome!: string;
-    public  status!: string;
+    public Id!: number;
+    public Nome!: number;
+    public Descricao!: number;
+    public Dt_inc!: Date;
+    public EmpresaId!: string;
+    public Status!: string;
 
     public mapFromApi(item: any): pgtoModel {
-        this.id = item.id;
-        this.id_empresa = item.id_empresa;
-        this.id_pessoa_inc = item.id_pessoa_inc;
-        this.dt_inc = new Date(item.dt_inc);
-        this.nome = item.nome;
-        this.status = item.status;
+        this.Id = item.Id;
+        this.Nome = item.Nome;
+        this.Descricao = item.Descricao;
+        this.Dt_inc = new Date(item.Dt_inc);
+        this.EmpresaId = item.EmpresaId;
+        this.Status = item.Status;
         return this;
     }
 }

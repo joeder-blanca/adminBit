@@ -29,9 +29,7 @@ export class NovoFinanceiroComponent {
 
   //listas
   listPessoas: any = [    
-    { id: '1', nome: 'João' },
-    { id: '2', nome: 'Maria' },
-    { id: '3', nome: 'Carlos' }
+    
   ];
   
   listContas: any = [];
@@ -51,13 +49,13 @@ export class NovoFinanceiroComponent {
   ) {
     const dtIncFormatted = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
     this.financeiroForm = this._fb.group({
-      id_pessoa_origem: [null, Validators.required],
-      id_conta: [null],
-      id_categoria_sf: [null],
-      dt_inc: [dtIncFormatted, Validators.required],
-      id_metodo: [null],
+      PessoaOrigemId: [null, Validators.required],
+      ContaId: [null],
+      CategoriaId: [null],
+      Dt_inc: [dtIncFormatted, Validators.required],
+      MetodoId: [null],
       valor: [null, Validators.required],
-      obs: [null],
+      Obs: [null],
     });
   }
 
@@ -94,7 +92,7 @@ export class NovoFinanceiroComponent {
         new pessoasModel().mapFromApi(item)
       );
       const filteredPessoas = this.listPessoas.filter(
-        (entry: pessoasModel) => entry.status === 'A'
+        (entry: pessoasModel) => entry.Status === 'A'
       );
       this.listPessoas = filteredPessoas;
     });
@@ -106,7 +104,7 @@ export class NovoFinanceiroComponent {
         new contasModel().mapFromApi(item)
       );
       const filteredContas = this.listContas.filter(
-        (entry: contasModel) => entry.status === 'A'
+        (entry: contasModel) => entry.Status === 'A'
       );
       this.listContas = filteredContas;
     });
@@ -118,7 +116,7 @@ export class NovoFinanceiroComponent {
         new categoriasModel().mapFromApi(item)
       );
       const filteredCategorias = this.listCategorias.filter(
-        (entry: categoriasModel) => entry.status === 'A'
+        (entry: categoriasModel) => entry.Status === 'A'
       );
       this.listCategorias = filteredCategorias;
     });
@@ -130,20 +128,21 @@ export class NovoFinanceiroComponent {
         new metodoModel().mapFromApi(item)
       );
       const filteredMetodo = this.listMetodo.filter(
-        (entry: metodoModel) => entry.status === 'A'
+        (entry: metodoModel) => entry.Status === 'A'
       );
       this.listMetodo = filteredMetodo;
     });
   }
 
   
-async novoFinanceiro(tipo: number): Promise<void> {
+async novoFinanceiro(tipo: String): Promise<void> {
   if (
     this.financeiroForm.invalid ||
     this.financeiroForm.get('valor')?.value === null ||
     this.financeiroForm.get('valor')?.value === ''
+
+    
   ) {
-    // Marca todos os controles do formulário como tocados para exibir mensagens de erro se forem inválidos
     Object.values(this.financeiroForm.controls).forEach(control => {
       control.markAsTouched();
     });
@@ -162,26 +161,26 @@ async novoFinanceiro(tipo: number): Promise<void> {
     const formattedValues = {
       financeiro: {
         ...formValues,
-        id_pessoa_inc: user,
-        tipo: tipo,
-        id_origem: 1,
-        id_f_pgto: 1
+        UserIncId: user,
+        Tipo: tipo,
+        OrigemId: 1,
+        IntervaloId: 1,
+        FormaId: 13
       },
       parcelas: [
         {
-          nr_parcela: 1,
-          dt_venc: dtVencFormatted,
-          valor: valor,
-          id_pessoa_inc: user,
-          id_empresa: empresa,
-          status: 'A'
+          EmpresaId: 1,
+          UserIncId: user,
+          Valor: valor,
+          Dt_venc: dtVencFormatted,
+          Status: 'A'
         }
       ]
-    };
-
-    
+    };    
       await this._adminApi.postFinanceiro(formattedValues).then(success =>{
-        console.log('ok');
+        //console.log('ok');
+
+        //colocar alerta
       }).catch(error =>{
         console.log("Erro na chamada postOs, response: " + error)
       });

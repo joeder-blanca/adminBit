@@ -68,7 +68,7 @@ export class adminApiProvider {
 
       let url = this.apiService.urlGetTotais;
       url = url.replace("{idUser}", this._idUser);
-      url = url.replace("{idEmpresa}", this._idEmpresa);
+      url = url.replace("{EmpresaId}", this._idEmpresa);
 
       return new Promise((resolve, reject) => {
         this.httpClient.get(url,true,false).then((response : any) => {
@@ -99,7 +99,7 @@ export class adminApiProvider {
 
       let url = this.apiService.urlGetFinanceiros;
       url = url.replace("{idUser}", this._idUser);
-      url = url.replace("{idEmpresa}", this._idEmpresa);
+      url = url.replace("{EmpresaId}", this._idEmpresa);
 
       return new Promise((resolve, reject) => {
         this.httpClient.get(url,true,false).then((response : any) => {
@@ -129,15 +129,15 @@ export class adminApiProvider {
         }
 
       let url = this.apiService.urlGetPessoas;
-      url = url.replace("{idEmpresa}", this._idEmpresa);
+      url = url.replace("{EmpresaId}", this._idEmpresa);
 
       return new Promise((resolve, reject) => {
         this.httpClient.get(url,true,false).then((response : any) => {
           let pessoas: pessoasModel[] = [];
-          if(JSON.stringify(response.dados) === '{}'){
+          if(JSON.stringify(response) === '{}'){
             pessoas = [];
           }else {
-            for(const item of response.dados){
+            for(const item of response){
               pessoas.push(new pessoasModel().mapFromApi(item));
             }
           }
@@ -160,15 +160,15 @@ export class adminApiProvider {
         }
 
       let url = this.apiService.urlGetContas;
-      url = url.replace("{idEmpresa}", this._idEmpresa);
+      url = url.replace("{EmpresaId}", this._idEmpresa);
 
       return new Promise((resolve, reject) => {
         this.httpClient.get(url,true,false).then((response : any) => {
           let contas: contasModel[] = [];
-          if(JSON.stringify(response.dados) === '{}'){
+          if(JSON.stringify(response) === '{}'){
             contas = [];
           }else {
-            for(const item of response.dados){
+            for(const item of response){
               contas.push(new contasModel().mapFromApi(item));
             }
           }
@@ -191,15 +191,15 @@ export class adminApiProvider {
         }
 
       let url = this.apiService.urlGetCategorias;
-      url = url.replace("{idEmpresa}", this._idEmpresa);
+      url = url.replace("{EmpresaId}", this._idEmpresa);
 
       return new Promise((resolve, reject) => {
         this.httpClient.get(url,true,false).then((response : any) => {
           let categoria: categoriasModel[] = [];
-          if(JSON.stringify(response.dados) === '{}'){
+          if(JSON.stringify(response) === '{}'){
             categoria = [];
           }else {
-            for(const item of response.dados){
+            for(const item of response){
               categoria.push(new categoriasModel().mapFromApi(item));
             }
           }
@@ -222,15 +222,15 @@ export class adminApiProvider {
         }
 
       let url = this.apiService.urlGetMetodos;
-      url = url.replace("{idEmpresa}", this._idEmpresa);
+      url = url.replace("{EmpresaId}", this._idEmpresa);
 
       return new Promise((resolve, reject) => {
         this.httpClient.get(url,true,false).then((response : any) => {
           let metodos: metodoModel[] = [];
-          if(JSON.stringify(response.dados) === '{}'){
+          if(JSON.stringify(response) === '{}'){
             metodos = [];
           }else {
-            for(const item of response.dados){
+            for(const item of response){
               metodos.push(new metodoModel().mapFromApi(item));
             }
           }
@@ -251,15 +251,15 @@ export class adminApiProvider {
         }
 
       let url = this.apiService.urlGetFpgto;
-      url = url.replace("{idEmpresa}", this._idEmpresa);
+      url = url.replace("{EmpresaId}", this._idEmpresa);
 
       return new Promise((resolve, reject) => {
         this.httpClient.get(url,true,false).then((response : any) => {
           let pagamentos: pgtoModel[] = [];
-          if(JSON.stringify(response.dados) === '{}'){
+          if(JSON.stringify(response) === '{}'){
             pagamentos = [];
           }else {
-            for(const item of response.dados){
+            for(const item of response){
               pagamentos.push(new pgtoModel().mapFromApi(item));
             }
           }
@@ -273,17 +273,27 @@ export class adminApiProvider {
     }
 
     public postFinanceiro(item: any): Promise<void>{
-      let url = this.apiService.urlPostFinanceiros;
+      const userJson = localStorage.getItem('bitADMIN.user');
+      if (userJson) {
+        const user = JSON.parse(userJson);
+        this._idEmpresa = user.id_empresa
+      } else {
+        console.error('Usuário não encontrado');
+      }
 
+      let url = this.apiService.urlPostFinanceiros;
+      url = url.replace("{EmpresaId}", this._idEmpresa);
+      // url = url.replace(";", "");
+      // console.log(url)
+    
       return new Promise((resolve, reject) => {
         this.httpClient.post(url, item, true, false)
           .then((response: any) => {
-            if(JSON.stringify(response.id) === "{}"){
+            if(JSON.stringify(response.Id) === "{}"){
               console.log("Resposta vazia");
             } else {
-              console.log(response);
             }
-            resolve(); // Resolve a Promise sem retornar nada
+            resolve();
           }, (err) => {
             reject(err);
           });

@@ -41,8 +41,6 @@ export class ReceitaComponent implements OnInit {
   searchForm!: FormGroup;
   periodoFiltro: string = 'Mês: Junho'
 
-
-
   vrReceitas: string = '';
 
   listTotais:any = [];
@@ -93,14 +91,11 @@ export class ReceitaComponent implements OnInit {
     }
   ];
 
-
   constructor(
     private i18n: NzI18nService,
     private _fb: FormBuilder,
     public _adminApi : adminApiProvider
   ) {}
-
-
 
   obterTotais(){
     let totalReceitas = 0;
@@ -122,7 +117,7 @@ export class ReceitaComponent implements OnInit {
     this._adminApi.getFinanceiros()
       .then(data => {
         this.listFinanceiros = data.map((item: any) => new financeirosModel().mapFromApi(item));
-                const filteredFinanceiros = this.listFinanceiros.filter((entry: financeirosModel) => entry.tipo == '1');
+                const filteredFinanceiros = this.listFinanceiros.filter((entry: financeirosModel) => entry.Tipo == '1');
 
         this.listFinanceiros = filteredFinanceiros;
       })
@@ -156,8 +151,8 @@ export class ReceitaComponent implements OnInit {
       conta: [null],
       categoria: [null]
     });
-    this.obterTotais();
-    this.obterFinanceiros();
+    //this.obterTotais();
+    //this.obterFinanceiros();
   }
 
   onChange(result: Date): void {

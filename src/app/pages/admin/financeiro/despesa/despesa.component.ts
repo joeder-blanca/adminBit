@@ -117,7 +117,7 @@ export class DespesaComponent {
     this._adminApi.getFinanceiros()
       .then(data => {
         this.listFinanceiros = data.map((item: any) => new financeirosModel().mapFromApi(item));
-                const filteredFinanceiros = this.listFinanceiros.filter((entry: financeirosModel) => entry.tipo == '1');
+                const filteredFinanceiros = this.listFinanceiros.filter((entry: financeirosModel) => entry.Tipo == '1');
 
         this.listFinanceiros = filteredFinanceiros;
       })

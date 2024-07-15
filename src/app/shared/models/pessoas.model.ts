@@ -1,32 +1,32 @@
 export class pessoasModel {
-    public id!: number;
-    public id_pessoa_tipo!: number;
-    public id_empresa!: number;
-    public nome!: string;
-    public apelido!: string;
-    public email!: string;
-    public cidade!: string;
-    public cep!: string;
-    public contato!: string;
-    public estado!: string;
-    public idade!: number;
-    public status!: string;
-    public dt_inc!: Date;
+    public Id!: number;
+    public TipoId!: number;
+    public EmpresaId!: number;
+    public Nome!: string;
+    public Cidade!: string;
+    public Estado!: string;
+    public Idade!: number;
+    public Descricao!: string;
+    public Cargo!: string;
+    public Fone!: string;
+    public UserId!: number;
+    public urlImagem!: string;
+    public Status!: string;
 
     public mapFromApi(item: any): pessoasModel {
-        this.id = item.id;
-        this.id_pessoa_tipo = item.id_pessoa_tipo;
-        this.id_empresa = item.id_empresa;
-        this.nome = item.nome;
-        this.apelido = item.apelido;
-        this.email = item.email;
-        this.cidade = item.cidade;
-        this.cep = item.cep;
-        this.contato = item.contato;
-        this.estado = item.estado;
-        this.idade = item.idade;
-        this.status = item.status;
-        this.dt_inc = new Date(item.dt_inc);
+        this.Id = Number(item.Id);
+        this.TipoId = Number(item.TipoId);
+        this.EmpresaId = Number(item.EmpresaId);
+        this.Nome = item.Nome;
+        this.Cidade = item.Cidade;
+        this.Estado = item.Estado;
+        this.Idade = Number(item.Idade);
+        this.Descricao = item.Descricao;
+        this.Cargo = item.Cargo;
+        this.Fone = item.Fone;
+        this.UserId = Number(item.UserId);
+        this.urlImagem = item.urlImagem;
+        this.Status = item.Status;
         return this;
     }
 }

@@ -27,16 +27,19 @@ export  class BaseService{
 
     //url metodo get
     public urlGetProfile = `${this.UrlServiceV1}/user/profile.php?UserId={UserId}&EmpresaId={EmpresaId}`
-    public urlGetTotais = `${this.UrlServiceV1}/totais/getTotaisPeriodo.php?idUser={idUser}&idEmpresa={idEmpresa}`;
-    public urlGetFinanceiros = `${this.UrlServiceV1}/Financeiro/getFinanceiro.php?idUser={idUser}&idEmpresa={idEmpresa}`;
-    public urlGetPessoas = `${this.UrlServiceV1}/listas/getListas.php?tabela=pessoa&idEmpresa={idEmpresa}`;
-    public urlGetContas = `${this.UrlServiceV1}/listas/getListas.php?tabela=conta&idEmpresa={idEmpresa}`;
-    public urlGetCategorias = `${this.UrlServiceV1}/listas/getListas.php?tabela=sf_categoria&idEmpresa={idEmpresa}`;
-    public urlGetMetodos = `${this.UrlServiceV1}/listas/getListas.php?tabela=sf_metodo&idEmpresa={idEmpresa}`;
-    public urlGetFpgto = `${this.UrlServiceV1}/listas/getListas.php?tabela=sf_f_pgto&idEmpresa={idEmpresa}`;
+    public urlGetPessoas = `${this.UrlServiceV1}/listas/listas.php?tabela=v_profile&EmpresaId={EmpresaId}`;
 
+    public urlGetContas = `${this.UrlServiceV1}/listas/listas.php?tabela=sf_contas&EmpresaId={EmpresaId}`;
+    public urlGetCategorias = `${this.UrlServiceV1}/listas/listas.php?tabela=sf_categoria&EmpresaId={EmpresaId}`;
+    public urlGetMetodos = `${this.UrlServiceV1}/listas/listas.php?tabela=sf_metodos&EmpresaId={EmpresaId}`;
+    public urlGetFpgto = `${this.UrlServiceV1}/listas/listas.php?tabela=sf_forma_pgto&EmpresaId={EmpresaId}`;
+    
+    public urlGetFinanceiros = `${this.UrlServiceV1}/financeiro/sf.php?EmpresaId={EmpresaId}`
+
+    public urlGetTotais = `${this.UrlServiceV1}/totais/getTotaisPeriodo.php?idUser={idUser}&idEmpresa={idEmpresa}`;
+    
     //url metodo post
-    public urlPostFinanceiros = `${this.UrlServiceV1}/financeiro/sf.php;`
+    public urlPostFinanceiros = `${this.UrlServiceV1}/financeiro/sf.php?EmpresaId={EmpresaId}`
 
 
     //Toda vez que chamar esse método, já irá retornar o header
