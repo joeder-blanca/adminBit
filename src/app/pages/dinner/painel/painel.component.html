@@ -1,0 +1,135 @@
+<div class="row bg-light p-3">
+    <div class="col-12">
+      <span class="h4 text-dark">Painel</span><br>
+      <small class="text-muted">Gerenciamento de Mesas</small>
+    </div>
+    <div class="col-12">
+      <div class="row">
+        <div class="col-3">
+            <div class="card bg-info-light h-100">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <span><i class="fa-solid fa-table-cells-large fa-2xl text-info"></i> Total</span>
+                        </div>
+                        <div class="col-8 d-flex justify-content-end">
+                            <span class="h3">{{mesasTotais}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card bg-success-light h-100">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <span><i class="fa-solid fa-square-check fa-2xl text-success"></i> Livres</span>
+                        </div>
+                        <div class="col-8 d-flex justify-content-end">
+                            <span class="h3">{{mesasLivres}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card bg-danger-light h-100">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-5">
+                            <span><i class="fa-solid fa-square-xmark fa-2xl text-danger"></i> Ocupadas</span>
+                        </div>
+                        <div class="col-7 d-flex justify-content-end">
+                            <span class="h3">{{mesasOcupadas}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card bg-dark-light h-100">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 h-100 d-flex justify-content-around">
+                            <button class="btn btn-sm btn-primary" title="Comandas"><i class="fa-solid fa-receipt"></i></button>
+                            <button class="btn btn-sm btn-primary" title="Venda Avulsa"><i class="fa-solid fa-shopping-basket"></i></button>
+                            <button class="btn btn-sm btn-primary" title="Venda Avulsa"><i class="fa-solid fa-shopping-basket"></i></button>
+                            <button class="btn btn-sm btn-primary" title="Gerenciar Caixa"><i class="fa-solid fa-cash-register"></i></button>
+                            <button class="btn btn-sm btn-primary" title="Pesquisar"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <button class="btn btn-sm btn-primary" title="Configurações"><i class="fa-solid fa-gear"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <hr>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-2 mt-3" *ngFor="let card of mesas">
+                  <div class="card h-100 bg-{{card.cor}}-light">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-5">
+                          <span><strong>Nrº {{ card.numero }}</strong></span>
+                        </div>
+                        <div class="col-7 d-flex justify-content-end">
+                          <span ><i class="{{card.icone}} text-{{card.cor}}"></i><strong> {{ card.status }}</strong></span>
+                        </div>
+                        <div class="col-12">
+                          <hr>
+                        </div>
+                        <div class="col-12">
+                          <span><strong>Cliente: </strong>{{ card.cliente }}</span>
+                        </div>
+                        <div class="col-12">
+                          <span><strong>Comandas: </strong>{{ card.comandas }}</span>
+                        </div>
+                        <div class="col-12">
+                          <span><strong>Valor: </strong>R$ {{ card.valor | number:'1.2-2' }}</span>
+                        </div>
+                        <div class="col-12 mb-0 pb-0">
+                          <hr class="mb-1">
+                        </div>
+                        <div class="col-12">
+                          <div class="row">
+                            <div class="col-5"></div>
+                            <div class="col-2">
+                              <button *ngIf="card.status === 'Ocupado'" class="btn btn-sm btn-success" title="Adicionar Produto">
+                                <i class="fa-solid fa-square-plus"></i>
+                              </button>
+                            </div>
+                            <div class="col-2">
+                              <button *ngIf="card.status === 'Ocupado'" class="btn btn-sm btn-warning" title="Adicionar Comanda">
+                                <i class="fa-solid fa-receipt"></i>
+                              </button>
+                              <button *ngIf="card.status === 'Livre'" class="btn btn-sm btn-warning text-light" title="Reservar Mesa">
+                                <i class="fa-solid fa-clock"></i>
+                              </button>
+                            </div>
+                            <div class="col-2">
+                              <button *ngIf="card.status === 'Livre' || card.status === 'Reservado'" class="btn btn-sm btn-danger" title="Ocupar Mesa">
+                                <i class="fa-solid fa-ban"></i>
+                              </button>
+                              <button *ngIf="card.status === 'Ocupado'"class="btn btn-sm btn-success" title="Liberar Mesa">
+                                <i class="fa-solid fa-square-check"></i>
+                              </button>
+                              <button *ngIf="card.status === 'Inativo'"class="btn btn-sm btn-primary" title="Ativar Mesa">
+                                <i class="fa-solid fa-square-check"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+        </div>
+      </div>
+    </div>
+  </div>
+  

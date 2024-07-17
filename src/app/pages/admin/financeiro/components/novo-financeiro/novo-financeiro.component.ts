@@ -182,7 +182,7 @@ async novoFinanceiro(tipo: String): Promise<void> {
 
         //colocar alerta
       }).catch(error =>{
-        console.log("Erro na chamada postOs, response: " + error)
+        console.log("Erro na chamada post, response: " + error)
       });
    
   } else {
