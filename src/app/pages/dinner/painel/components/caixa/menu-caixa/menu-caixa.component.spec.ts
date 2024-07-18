@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PainelComponent } from './painel.component';
+import { MenuCaixaComponent } from './menu-caixa.component';
 
-describe('PainelComponent', () => {
-  let component: PainelComponent;
-  let fixture: ComponentFixture<PainelComponent>;
+describe('MenuCaixaComponent', () => {
+  let component: MenuCaixaComponent;
+  let fixture: ComponentFixture<MenuCaixaComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PainelComponent]
+      declarations: [MenuCaixaComponent]
     });
-    fixture = TestBed.createComponent(PainelComponent);
+    fixture = TestBed.createComponent(MenuCaixaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -27,13 +27,27 @@ import { IconsProviderModule } from 'src/app/icons-provider.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DinnerRoutingModule } from './dinner.route';
 import { PainelComponent } from './painel/painel.component';
+import { ConfiguracoesComponent } from './painel/components/configuracoes/configuracoes.component';
+import { NovoComandaComponent } from './painel/components/novo-comanda/novo-comanda.component';
+import { AdicionarProdutoComponent } from './painel/components/adicionar-produto/adicionar-produto.component';
+import { VendaAvulsaComponent } from './painel/components/venda-avulsa/venda-avulsa.component';
+import { PainelCaixaComponent } from './painel/components/caixa/painel-caixa/painel-caixa.component';
+import { MenuCaixaComponent } from './painel/components/caixa/menu-caixa/menu-caixa.component';
+import { ListaComandasComponent } from './painel/components/lista-comandas/lista-comandas.component';
 
 
 @NgModule({
   declarations: [
     DinnerAppComponent,
     IndexComponent,
-    PainelComponent
+    PainelComponent,
+    ConfiguracoesComponent,
+    NovoComandaComponent,
+    AdicionarProdutoComponent,
+    VendaAvulsaComponent,
+    PainelCaixaComponent,
+    MenuCaixaComponent,
+    ListaComandasComponent
   ],
   imports: [
     CommonModule,

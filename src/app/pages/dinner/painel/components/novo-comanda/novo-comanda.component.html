@@ -1,0 +1,121 @@
+<div [ngClass]="modalWidth">
+  <nz-modal [(nzVisible)]="statusModal"
+          [nzWidth]="modalWidth"
+          [nzTitle]="tituloModal" 
+          [nzFooter]="null"
+          (nzOnCancel)="handleCancel()">
+  <ng-container *nzModalContent>
+    <div *ngIf="loading" class="spinner-container">
+        <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
+    </div>       
+    <div class="row">
+      <div class="col-12">
+          <form [formGroup]="formDados">
+            <div class="row">
+              <div class="col-xl-12 col-12">
+                <div class="row">
+                  <div class="col-xl-6 col-12">
+                    <label for="numeroMesa">Número da Mesa</label>
+                  </div>
+                  <div class="col-xl-6"></div>
+                  <div class="col-xl-2 col-12">
+                    <input id="numeroMesa" formControlName="numeroMesa" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 mt-2">
+                <div class="inner-box">
+                  <label class="hidden-sm">Cliente <span class="text-danger">*</span></label><br>
+                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecione o cliente" formControlName="cliente" class="w-100">
+                    <nz-option *ngFor="let pessoa of listPessoas" [nzValue]="pessoa.Id" [nzLabel]="pessoa.Nome"></nz-option>
+                  </nz-select>
+                  <div *ngIf="formDados.get('cliente')?.invalid && formDados.get('cliente')?.touched">
+                    <small class="text-danger">Campo obrigatório</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <hr>
+              </div>
+            </div>
+          </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <form [formGroup]="formProdutos">
+          <div class="row">
+            <div class="col-xl-8 col-12">
+              <div class="inner-box">
+                <label class="hidden-sm">Produto</label><br>
+                <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecione um produto" formControlName="produto" class="w-100">
+                  <nz-option *ngFor="let produto of listProdutos" [nzValue]="produto.Id" [nzLabel]="produto.Nome"></nz-option>
+                </nz-select>
+              </div>
+            </div>
+            <div class="col-xl-3 col-12 mt-sm-1">
+              <label class="hidden-sm">Quantidade</label><br>
+              <div class="input-group">
+                <button (click)="qtde('-')" type="button" class="btn btn-sm btn-primary" title="Diminuir Quantidade">
+                  <i class="fa-solid fa-square-caret-down"></i>
+                </button>
+                <input nz-input placeholder="0" type="number" formControlName="qtde"/>
+                <button (click)="qtde('+')" type="button" class="btn btn-sm btn-primary" title="Aumentar Quantidade">
+                  <i class="fa-solid fa-square-caret-up"></i>
+                </button>
+              </div>
+            </div>
+            <div class="col-xl-1 col-12 d-flex align-items-end justify-content-end mt-2">
+              <button (click)="adicionarProduto();" type="button" class="btn btn-sm btn-success w-100" title="Adicionar produto"><i class="fa-solid fa-square-plus"></i><span class="view-sm"> Adicionar Produto</span></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <hr>
+      </div>
+      <div class="col-12">
+          <nz-table [nzSize]="'small'" [nzNoResult]="noResultTemplate" #basicTable nzAlign="'center'" [nzShowPagination]="false">
+            <thead>
+              <tr>
+                <th class="text-center"><span class="hidden-sm">Descrição</span><span class="view-sm"><i class="fa-solid fa-utensils"></i></span></th>
+                <th class="text-center"><span class="hidden-sm">Qtde.</span><span class="view-sm"><i class="fa-solid fa-list-ol"></i></span></th>
+                <th class="text-center"><span class="hidden-sm">Valor(un)</span><span class="view-sm"><i class="fa-solid fa-file-invoice-dollar"></i></span></th>
+                <th class="text-center"><span class="hidden-sm">Valor(total)</span><span class="view-sm"><i class="fa-solid fa-sack-dollar"></i></span></th>
+                <th class="text-center"><i class="fa-solid fa-toggle-on view-sm"></i></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of listProdutosAdd">
+                <td>{{ data.Nome.length > 15 ? data.Nome.slice(0, 15) + '...' : data.Nome }}</td>
+                <td>{{ data.Qtde }}</td>
+                <td>{{ data.Valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</td>
+                <td>{{ (data.Qtde * data.Valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</td>                
+                <td class="text-right td-action" *ngIf="data.Id">
+                  <button type="button" class="btn btn-sm btn-danger" title="Remover Produto" (click)="removerProduto(data.Id)">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            <ng-template #noResultTemplate>
+              <tr *ngIf="!listProdutosAdd[0]">
+                <td colspan="4" class="text-center">Nenhum resultado encontrado.</td>
+              </tr>
+            </ng-template>
+          </nz-table>
+      </div>
+      <div class="col-8">
+        <span class="text-primary h5">TOTAL: <span class="text-primary h5"><strong>{{totalComandaString}}</strong></span></span>
+      </div>
+      <div class="col-4 d-flex justify-content-end mt-3">
+        <button (click)="onSubmit();" type="submit" class="btn btn-primary" [disabled]="formDados.invalid"><i class="fa-solid fa-floppy-disk"></i> Salvar</button>
+      </div>
+    </div>
+  </ng-container>
+</nz-modal>
+</div>
+
+

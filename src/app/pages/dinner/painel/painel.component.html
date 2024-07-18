@@ -1,16 +1,24 @@
-<div class="row bg-light p-3">
-    <div class="col-12">
+<div class="row h-100 d-flex align-content-start bg-light p-3">
+    <div class="col-9">
       <span class="h4 text-dark">Painel</span><br>
       <small class="text-muted">Gerenciamento de Mesas</small>
+    </div>
+    <div class="col-3 d-flex justify-content-around align-items-center">
+      <span class="h5 text-{{sessao[0].statusCor}}">
+        <strong>{{sessao[0].status}}</strong>
+      </span>
+      <span *ngIf="sessao[0].status === 'Aberto'"  class="h5">&nbsp;{{sessao[0].tempoAberto}}</span>
+      <button *ngIf="sessao[0].status === 'Aberto'" (click)="alterarStatusLoja()" class="btn btn-sm btn-danger" title="Fechar Loja"><i class="fa-solid fa-square-xmark"></i><span class="hidden-sm"> Fechar Loja</span></button>    
+      <button *ngIf="sessao[0].status === 'Fechado'" (click)="alterarStatusLoja()" class="btn btn-sm btn-success" title="Abrir Loja"><i class="fa-solid fa-square-check"></i><span class="hidden-sm"> Abrir Loja</span></button>  
     </div>
     <div class="col-12">
       <div class="row">
         <div class="col-3">
-            <div class="card bg-info-light h-100">
+            <div class="card bg-dark-light h-100">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-4">
-                            <span><i class="fa-solid fa-table-cells-large fa-2xl text-info"></i> Total</span>
+                            <span><i class="fa-solid fa-table-cells-large fa-2xl text-primary"></i> Total</span>
                         </div>
                         <div class="col-8 d-flex justify-content-end">
                             <span class="h3">{{mesasTotais}}</span>
@@ -20,7 +28,7 @@
             </div>
         </div>
         <div class="col-3">
-            <div class="card bg-success-light h-100">
+            <div class="card bg-dark-light h-100">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-4">
@@ -34,7 +42,7 @@
             </div>
         </div>
         <div class="col-3">
-            <div class="card bg-danger-light h-100">
+            <div class="card bg-dark-light h-100">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-5">
@@ -52,12 +60,11 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12 h-100 d-flex justify-content-around">
-                            <button class="btn btn-sm btn-primary" title="Comandas"><i class="fa-solid fa-receipt"></i></button>
-                            <button class="btn btn-sm btn-primary" title="Venda Avulsa"><i class="fa-solid fa-shopping-basket"></i></button>
-                            <button class="btn btn-sm btn-primary" title="Venda Avulsa"><i class="fa-solid fa-shopping-basket"></i></button>
-                            <button class="btn btn-sm btn-primary" title="Gerenciar Caixa"><i class="fa-solid fa-cash-register"></i></button>
-                            <button class="btn btn-sm btn-primary" title="Pesquisar"><i class="fa-solid fa-magnifying-glass"></i></button>
-                            <button class="btn btn-sm btn-primary" title="Configurações"><i class="fa-solid fa-gear"></i></button>
+                            <button class="btn btn-sm btn-dark" title="Comandas"><i class="fa-solid fa-receipt"></i></button>
+                            <button class="btn btn-sm btn-dark" title="Venda Avulsa"><i class="fa-solid fa-shopping-basket"></i></button>
+                            <button class="btn btn-sm btn-dark" title="Gerenciar Caixa"><i class="fa-solid fa-cash-register"></i></button>
+                            <button class="btn btn-sm btn-dark" title="Pesquisar"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <button class="btn btn-sm btn-dark" (click)="acessarConfiguracoes();" title="Configurações"><i class="fa-solid fa-gear"></i></button>
                         </div>
                     </div>
                 </div>
@@ -82,9 +89,6 @@
                           <hr>
                         </div>
                         <div class="col-12">
-                          <span><strong>Cliente: </strong>{{ card.cliente }}</span>
-                        </div>
-                        <div class="col-12">
                           <span><strong>Comandas: </strong>{{ card.comandas }}</span>
                         </div>
                         <div class="col-12">
@@ -95,28 +99,36 @@
                         </div>
                         <div class="col-12">
                           <div class="row">
-                            <div class="col-5"></div>
+                            <div class="col-5">
+                              <button (click)="alterarStatusMesa(card.numero, 'Inativo')" *ngIf="card.status === 'Livre'" class="btn btn-sm btn-danger" title="Inativar Mesa">
+                                <i class="fa-solid fa-square-xmark"></i>
+                              </button>
+                            </div>
                             <div class="col-2">
-                              <button *ngIf="card.status === 'Ocupado'" class="btn btn-sm btn-success" title="Adicionar Produto">
+                              <button *ngIf="card.status === 'Ocupado' && card.comandas != 0" class="btn btn-sm btn-success" title="Adicionar Produto">
                                 <i class="fa-solid fa-square-plus"></i>
                               </button>
                             </div>
                             <div class="col-2">
-                              <button *ngIf="card.status === 'Ocupado'" class="btn btn-sm btn-warning" title="Adicionar Comanda">
+                              <button (click)="adicionarComanda(card.numero);" *ngIf="card.status === 'Ocupado'" class="btn btn-sm btn-warning" title="Adicionar Comanda">
                                 <i class="fa-solid fa-receipt"></i>
                               </button>
-                              <button *ngIf="card.status === 'Livre'" class="btn btn-sm btn-warning text-light" title="Reservar Mesa">
+                              <button (click)="alterarStatusMesa(card.numero, 'Reservado')" *ngIf="card.status === 'Livre'" class="btn btn-sm btn-warning text-light" title="Reservar Mesa">
                                 <i class="fa-solid fa-clock"></i>
                               </button>
                             </div>
                             <div class="col-2">
-                              <button *ngIf="card.status === 'Livre' || card.status === 'Reservado'" class="btn btn-sm btn-danger" title="Ocupar Mesa">
-                                <i class="fa-solid fa-ban"></i>
+                              <button
+                                  (click)="adicionarComanda(card.numero);" 
+                                  *ngIf="card.status === 'Livre' || card.status === 'Reservado'" 
+                                  class="btn btn-sm btn-danger" 
+                                  title="Ocupar Mesa">
+                                  <i class="fa-solid fa-ban"></i>
                               </button>
-                              <button *ngIf="card.status === 'Ocupado'"class="btn btn-sm btn-success" title="Liberar Mesa">
+                              <button (click)="alterarStatusMesa(card.numero, 'Livre')" *ngIf="card.status === 'Ocupado'"class="btn btn-sm btn-success" title="Liberar Mesa">
                                 <i class="fa-solid fa-square-check"></i>
                               </button>
-                              <button *ngIf="card.status === 'Inativo'"class="btn btn-sm btn-primary" title="Ativar Mesa">
+                              <button (click)="alterarStatusMesa(card.numero, 'Livre')" *ngIf="card.status === 'Inativo'"class="btn btn-sm btn-primary" title="Ativar Mesa">
                                 <i class="fa-solid fa-square-check"></i>
                               </button>
                             </div>
@@ -127,9 +139,14 @@
                   </div>
                 </div>
               </div>
-              
         </div>
       </div>
     </div>
   </div>
-  
+  <app-configuracoes [status]="visibleConfig" (statusChange)="visibleConfig = $event"></app-configuracoes>
+  <app-novo-comanda 
+    [statusModal]="visibleNovoComanda" 
+    [idMesa]="idMesa" 
+    (statusChange)="visibleNovoComanda = $event" 
+    (mesaAtualizada)="onMesaAtualizada($event)">
+  </app-novo-comanda>

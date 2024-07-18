@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-painel',
@@ -6,195 +7,153 @@ import { Component } from '@angular/core';
   styleUrls: ['./painel.component.css']
 })
 export class PainelComponent {
-  mesasTotais = 0;
-  mesasOcupadas = 0;
-  mesasLivres = 0;
-  
+  mesasTotais: number = 0;
+  mesasOcupadas: number = 0;
+  mesasLivres: number = 0;
+  idMesa: number = 0;
+  visibleConfig: boolean = false;
+  visibleNovoComanda: boolean = false;
+
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  sessao = [
+    {
+      statusCor: 'success',
+      status: "Aberto",
+      dataHoraAbertura: "2024-07-18 05:28:40",
+      userAbertura: 'Joeder Blanca',
+      tempoAberto: ''
+    }
+  ];
+
   mesas = [
     { 
-      cor: 'danger',
-      icone: 'fa-solid fa-square-xmark',
-      numero: '01',
-      status: 'Ocupado',
-      cliente: 'Cliente 1',
-      comandas: 5,
-      valor: 1500.00
-    },
-    { 
-      cor: 'warning',
-      icone: 'fa-solid fa-square-xmark',
-      numero: '02',
-      status: 'Reservado',
-      cliente: 'Cliente 1',
-      comandas: 5,
-      valor: 1500.00
-    },
-    { 
       cor: 'success',
-      icone: 'fa-solid fa-square-xmark',
-      numero: '03',
+      icone: 'fa-solid fa-square-check',
+      numero: 1,
       status: 'Livre',
       cliente: '',
       comandas: 0,
       valor: 0
-    },
-    { 
-      cor: 'success',
-      icone: 'fa-solid fa-square-xmark',
-      numero: '04',
-      status: 'Livre',
-      cliente: '',
-      comandas: 0,
-      valor: 0
-    },
-    { 
-      cor: 'success',
-      icone: 'fa-solid fa-square-xmark',
-      numero: '05',
-      status: 'Livre',
-      cliente: '',
-      comandas: 0,
-      valor: 0
-    },
-    { 
-      cor: 'success',
-      icone: 'fa-solid fa-square-xmark',
-      numero: '06',
-      status: 'Livre',
-      cliente: '',
-      comandas: 0,
-      valor: 0
-    },
-    { 
-      cor: 'success',
-      icone: 'fa-solid fa-square-xmark',
-      numero: '07',
-      status: 'Livre',
-      cliente: '',
-      comandas: 0,
-      valor: 0
-    },
-    { 
-      cor: 'success',
-      icone: 'fa-solid fa-square-xmark',
-      numero: '08',
-      status: 'Livre',
-      cliente: '',
-      comandas: 0,
-      valor: 0
-    },
-    { 
-      cor: 'success',
-      icone: 'fa-solid fa-square-xmark',
-      numero: '09',
-      status: 'Livre',
-      cliente: '',
-      comandas: 0,
-      valor: 0
-    },
-    { 
-      cor: 'success',
-      icone: 'fa-solid fa-square-xmark',
-      numero: '10',
-      status: 'Livre',
-      cliente: '',
-      comandas: 0,
-      valor: 0
-    },
-    { 
-      cor: 'success',
-      icone: 'fa-solid fa-square-xmark',
-      numero: '11',
-      status: 'Livre',
-      cliente: '',
-      comandas: 0,
-      valor: 0
-    },
-    { 
-      cor: 'success',
-      icone: 'fa-solid fa-square-xmark',
-      numero: '12',
-      status: 'Livre',
-      cliente: '',
-      comandas: 0,
-      valor: 0
-    },
-    { 
-      cor: 'dark',
-      icone: 'fa-solid fa-circle-info',
-      numero: '13',
-      status: 'Inativo',
-      cliente: '',
-      comandas: 0,
-      valor: 0
-    },
-    { 
-      cor: 'dark',
-      icone: 'fa-solid fa-circle-info',
-      numero: '14',
-      status: 'Inativo',
-      cliente: '',
-      comandas: 0,
-      valor: 0
-    },
-    { 
-      cor: 'dark',
-      icone: 'fa-solid fa-circle-info',
-      numero: '15',
-      status: 'Inativo',
-      cliente: '',
-      comandas: 0,
-      valor: 0
-    },
-    { 
-      cor: 'dark',
-      icone: 'fa-solid fa-circle-info',
-      numero: '15',
-      status: 'Inativo',
-      cliente: '',
-      comandas: 0,
-      valor: 0
-    },
-    { 
-      cor: 'dark',
-      icone: 'fa-solid fa-circle-info',
-      numero: '15',
-      status: 'Inativo',
-      cliente: '',
-      comandas: 0,
-      valor: 0
-    },{ 
-      cor: 'dark',
-      icone: 'fa-solid fa-circle-info',
-      numero: '15',
-      status: 'Inativo',
-      cliente: '',
-      comandas: 0,
-      valor: 0
-    },
-    { 
-      cor: 'dark',
-      icone: 'fa-solid fa-circle-info',
-      numero: '15',
-      status: 'Inativo',
-      cliente: '',
-      comandas: 0,
-      valor: 0
-    },
-
+    }
   ];
 
   ngOnInit() {
     this.calcularMesas();
+    this.atualizarTempoAberto();
     setInterval(() => {
       this.calcularMesas();
       console.log('pagina atualizada');
     }, 60000);
   }
+
+  atualizarTempoAberto() {
+    interval(1000).subscribe(() => {
+      if (this.sessao[0].status === 'Aberto') {
+        const agora = new Date();
   
+        this.sessao.forEach(s => {
+          const abertura = new Date(s.dataHoraAbertura);
+          const diffMs = agora.getTime() - abertura.getTime();
+  
+          const diffSecs = Math.floor((diffMs / 1000) % 60);
+          const diffMins = Math.floor((diffMs / (1000 * 60)) % 60);
+          const diffHrs = Math.floor((diffMs / (1000 * 60 * 60)) % 24);
+          
+          s.tempoAberto = `${diffHrs}h ${diffMins}m ${diffSecs}s`;
+        });
+      }
+    });
+  }
+
   calcularMesas() {
     this.mesasTotais = this.mesas.length;
     this.mesasOcupadas = this.mesas.filter(card => card.status === 'Ativo' || card.status === 'Ocupado').length;
     this.mesasLivres = this.mesasTotais - this.mesasOcupadas;
   }
+
+  onMesaAtualizada(event: { idMesa: number; status: string }) {
+    this.alterarStatusMesa(event.idMesa, event.status);
+    this.calcularComandas(event.idMesa);
+  }
+
+  //comandos e funcionalidades
+  abrirLoja(){
+    this.alterarStatusLoja();
+  }
+
+  fecharLoja(){
+    this.alterarStatusLoja();
+  }
+
+  adicionarComanda(idMesa: number){
+    this.idMesa = idMesa;
+    this.visibleNovoComanda = true;
+  }
+
+  liberarMesa(idMesa: number){
+    const mesa = this.mesas.find(m => +m.numero === idMesa);
+    //verifica se a mesa possui comandas em aberto e toma tratativas;
+    //chama a api que faz a liberação da mesa;
+  }
+
+  acessarConfiguracoes(){
+    this.visibleConfig = true;
+  }
+
+  //codigo temporario sem API
+
+
+  alterarStatusLoja() {
+    const sessao = this.sessao[0];
+  
+    if (sessao.status === 'Aberto') {
+      sessao.status = 'Fechado';
+      sessao.dataHoraAbertura = '';
+      sessao.statusCor = 'danger';
+      sessao.tempoAberto = '';
+    } else {
+      sessao.status = 'Aberto';
+      const dataAtual = new Date();
+      const horaBrasilia = dataAtual.toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' });
+      sessao.dataHoraAbertura = horaBrasilia.slice(0, 19).replace('T', ' ');
+      sessao.statusCor = 'success';
+      sessao.tempoAberto = '';
+    }
+  }
+  
+  
+  alterarStatusMesa(idMesa: number, status: string) {
+    const mesa = this.mesas.find(m => +m.numero === idMesa);
+
+    if (mesa) {
+      mesa.status = status;
+      if (status === 'Livre') {
+        mesa.cor = 'success';
+        mesa.icone = 'fa-solid fa-square-check';
+        mesa.comandas = 0;
+      } else if (status === 'Ocupado') {
+        mesa.cor = 'danger';
+        mesa.icone = 'fa-solid fa-square-xmark';
+      } else if (status === 'Reservado') {
+        mesa.cor = 'warning';
+        mesa.icone = 'fa-solid fa-clock';
+      } else if (status === 'Inativo') {
+        mesa.cor = 'dark';
+        mesa.icone = 'fa-solid fa-circle-info';
+      }
+      this.cdr.detectChanges(); 
+    }
+  }
+
+  calcularComandas(idMesa: number) {
+    const mesa = this.mesas.find(m => +m.numero === idMesa);
+
+    if (mesa) {
+      mesa.comandas = mesa.comandas + 1;
+      this.cdr.detectChanges();
+    }
+  }
+
+
 }
