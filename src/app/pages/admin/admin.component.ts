@@ -23,7 +23,7 @@ export class AdminAppComponent {
     { title: 'Despesas', link: './despesas', claim: 'STANDARD' },
     { title: 'Pagar/Receber', link: './contas', claim: 'STANDARD' },
     { title: 'Fluxo de Caixa', link: './fluxo', claim: 'STANDARD' },
-    { title: 'Planejamento', link: '/planejamento', claim: 'STANDARD' }
+    { title: 'Planejamento', link: './planejamento', claim: 'STANDARD' }
   ];
 
   filteredMenuItems: MenuItem[] = [];

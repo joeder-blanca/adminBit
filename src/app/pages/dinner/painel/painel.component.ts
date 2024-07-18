@@ -50,22 +50,19 @@ export class PainelComponent {
   atualizarTempoAberto() {
     interval(1000).subscribe(() => {
       if (this.sessao[0].status === 'Aberto') {
-        const agora = new Date();
-  
         this.sessao.forEach(s => {
           const abertura = new Date(s.dataHoraAbertura);
+          const agora = new Date();
           const diffMs = agora.getTime() - abertura.getTime();
-  
-          const diffSecs = Math.floor((diffMs / 1000) % 60);
-          const diffMins = Math.floor((diffMs / (1000 * 60)) % 60);
-          const diffHrs = Math.floor((diffMs / (1000 * 60 * 60)) % 24);
-          
+          const diffSecs = Math.floor(diffMs / 1000) % 60;
+          const diffMins = Math.floor(diffMs / (1000 * 60)) % 60;
+          const diffHrs = Math.floor(diffMs / (1000 * 60 * 60));  
           s.tempoAberto = `${diffHrs}h ${diffMins}m ${diffSecs}s`;
         });
       }
     });
   }
-
+  
   calcularMesas() {
     this.mesasTotais = this.mesas.length;
     this.mesasOcupadas = this.mesas.filter(card => card.status === 'Ativo' || card.status === 'Ocupado').length;
@@ -114,13 +111,12 @@ export class PainelComponent {
       sessao.tempoAberto = '';
     } else {
       sessao.status = 'Aberto';
-      const dataAtual = new Date();
-      const horaBrasilia = dataAtual.toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' });
-      sessao.dataHoraAbertura = horaBrasilia.slice(0, 19).replace('T', ' ');
+      sessao.dataHoraAbertura = new Date().toISOString();
       sessao.statusCor = 'success';
       sessao.tempoAberto = '';
     }
   }
+  
   
   
   alterarStatusMesa(idMesa: number, status: string) {

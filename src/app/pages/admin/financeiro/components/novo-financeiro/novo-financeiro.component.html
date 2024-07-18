@@ -1,21 +1,24 @@
 
     
     <nz-modal [(nzVisible)]="statusModal"
+    [nzClosable]="false"
+    [nzStyle]="{ 'margin-top': '-95px' }"
     [nzWidth]="modalWidth"
-    [nzTitle]="tituloModal" 
+    [nzTitle]="modalTitleTemplate"
     [nzFooter]="null"
     (nzOnCancel)="handleCancel()" 
     (nzOnOk)="handleOk()">
       <ng-container *nzModalContent>
-        <div *ngIf="loading" class="spinner-container">
 
+        
+        <div *ngIf="loading" class="spinner-container">
           <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
         </div>       
         <div class="row">
           <div class="col-12">
             <form [formGroup]="financeiroForm" (ngSubmit)="novoFinanceiro('E')">
               <div class="row" style="display: flex; align-items: end;">
-                <div class="col-9 text-light mb-3">
+                <div class="col-xl-9 col-12 text-light mb-3">
                   <div class="inner-box">
                     <label>Pessoa <span class="text-danger">*</span></label><br>
                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecione a pessoa" [(ngModel)]="selectedValue" formControlName="PessoaOrigemId" class="w-100">
@@ -26,7 +29,7 @@
                     </div>                      
                   </div>
                 </div>
-                <div class="col-3 text-light mb-3">
+                <div class="col-xl-3 col-12 text-light mb-3">
                   <div class="inner-box">
                     <label>Conta</label>
                     <nz-select nzShowSearch formControlName="ContaId" class="w-100" nzAllowClear nzPlaceHolder="Selecione conta">
@@ -34,7 +37,7 @@
                     </nz-select>
                   </div>
                 </div>
-                <div class="col-3 text-light mb-3">
+                <div class="col-xl-3 col-12 text-light mb-3">
                   <div class="inner-box">
                     <label>Categoria</label>
                     <nz-select nzShowSearch formControlName="CategoriaId" class="w-100" nzAllowClear nzPlaceHolder="Selecione categoria">
@@ -42,7 +45,7 @@
                     </nz-select>
                   </div>
                 </div>
-                <div class="col-3 text-light mb-3">
+                <div class="col-xl-3 col-12 text-light mb-3">
                   <div class="inner-box">
                     <label>Data<span class="text-danger">*</span></label>
                     <nz-date-picker formControlName="Dt_inc"
@@ -55,7 +58,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-3 text-light mb-3">
+                <div class="col-xl-3 col-12 text-light mb-3">
                   <div class="inner-box">
                     <label>Forma Pagamento</label>
                     <nz-select nzShowSearch formControlName="MetodoId" class="w-100" nzAllowClear nzPlaceHolder="Selecione">
@@ -63,7 +66,7 @@
                     </nz-select>
                   </div>
                 </div>                 
-                <div class="col-3 text-light mb-3">
+                <div class="col-xl-3 col-12 text-light mb-3">
                   <div class="inner-box">
                     <label>Valor(R$)<span class="text-danger">*</span></label>
                     <nz-input-number
@@ -83,14 +86,15 @@
                 <div class="col-12 text-light mb-3">
                   <div class="inner-box">
                     <label>Observações</label>
-                    <textarea formControlName="Obs" rows="4" nz-input></textarea>
+                    <textarea formControlName="Obs" rows="3" nz-input></textarea>
                   </div>
                 </div>
                 <div class="col-12">
                   <hr>
                 </div>
-                <div class="col-12 text-light text-right">
-                  <button class="btn btn-sm btn-success h-100" type="submit"><i class="fa-solid fa-floppy-disk"></i> Salvar</button>
+                <div class="col-12 text-light text-right mb-2">
+                  <button class="btn btn-sm btn-success h-100 hidden-sm" type="submit"><i class="fa-solid fa-floppy-disk"></i> Salvar</button>
+                  <button class="btn btn-sm btn-success w-100" type="submit"><i class="fa-solid fa-floppy-disk"></i> Salvar</button>
                 </div>
               </div>
             </form>
@@ -98,4 +102,9 @@
         </div>
       </ng-container>
     </nz-modal>
-  
+    <ng-template #modalTitleTemplate>
+      <div class="d-flex justify-content-between align-items-center">
+        <span>{{ tituloModal }}</span>
+        <button class="btn btn-sm btn-danger" (click)="handleCancel()">X</button>
+      </div>
+    </ng-template>

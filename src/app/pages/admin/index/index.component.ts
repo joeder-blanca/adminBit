@@ -11,6 +11,8 @@ import { NzPlacementType } from 'ng-zorro-antd/dropdown';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent {
-
+  public links = {
+    receitas: '../receitas'
+  }
  
 }

@@ -6,7 +6,7 @@ import { DinnerAboutComponent } from './pages/servicos/dinner-about/dinner-about
 
 const routes: Routes = [
 
-  { path: '',pathMatch:'full', redirectTo:'/home'},
+  {path: '',pathMatch:'full', redirectTo:'/home'},
   {path: 'home', component: HomeComponent},
   {path: 'admin-about', component: AdminAboutComponent},
   {path: 'dinner-about', component: DinnerAboutComponent},

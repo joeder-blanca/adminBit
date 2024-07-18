@@ -77,7 +77,7 @@ export class LoginComponent {
     if (fail.error) {
       if (fail.error.errors.Senha) {
         for (let erro of fail.error.errors.Senha) {
-          console.log('erro 1')
+          console.log('erro 1 ->', erro)
           //notify(erro, 'error', 3000);
         }
       }
@@ -85,12 +85,12 @@ export class LoginComponent {
       if (fail.error.errors.Mensagens) {
         for (let erro of fail.error.errors.Mensagens) {
           //notify(erro, 'error', 3000);
-          console.log('erro 2')
+          console.log('erro 2 ->', erro)
         }
       }
     } else {
       //notify(fail, 'error', 3000);
-      console.log('erro 3')
+      console.log('erro 3 ->', fail)
     }
 
 

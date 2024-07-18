@@ -9,11 +9,30 @@
     (nzOnOk)="handleOk()">
       <ng-container *nzModalContent>
         <div *ngIf="loading" class="spinner-container">
-
           <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
         </div>       
         <div class="row">
-          
+          <form >
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="row">
+                  <div class="inner-box">
+                    <label class="hidden-sm">Mesas Ativas <span class="text-danger">*</span></label><br>
+                    <input id="mesasAtivas" formControlName="mesasAtivas" class="form-control">
+                    <div *ngIf="formDados.get('mesasAtivas')?.invalid && formDados.get('mesasAtivas')?.touched">
+                      <small class="text-danger">Campo obrigatório</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <hr>
+              </div>
+              <div class="col-12 d-flex justify-content-end mt-3">
+                <button  type="submit" class="btn btn-primary" [disabled]="formDados.invalid"><i class="fa-solid fa-floppy-disk"></i> Salvar</button>
+              </div>
+            </div>
+          </form>
         </div>
       </ng-container>
     </nz-modal>

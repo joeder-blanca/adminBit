@@ -39,6 +39,7 @@ import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminAboutComponent } from './pages/servicos/admin-about/admin-about.component';
 import { LoginComponent } from './pages/login/login.component';
+import { DinnerAboutComponent } from './pages/servicos/dinner-about/dinner-about.component';
 
 
 registerLocaleData(pt);
@@ -48,6 +49,7 @@ registerLocaleData(pt);
     AppComponent,
     CadastroComponent,
     AdminAboutComponent,
+    DinnerAboutComponent,
     LoginComponent
   ],
   imports: [

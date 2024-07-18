@@ -37,7 +37,7 @@ export class ReceitaComponent implements OnInit {
   isEnglish = false;
   visible = false;
   visibleMenu = false;
-  visibleNovoFinanceiro: boolean = true;
+  visibleNovoFinanceiro = false;
   searchForm!: FormGroup;
   periodoFiltro: string = 'Mês: Junho'
 

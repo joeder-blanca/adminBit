@@ -55,12 +55,12 @@ export class NovoComandaComponent implements OnInit, OnChanges {
 
   listProdutosAdd: any = [];
 
-  public isSmallScreen = false; // Variável para verificar se a tela é pequena
+  public isSmallScreen = false; 
 
   constructor(
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
-    private breakpointObserver: BreakpointObserver // Injeção do BreakpointObserver do @angular/cdk/layout
+    private breakpointObserver: BreakpointObserver 
   ) {
     this.formDados = this.fb.group({
       numeroMesa: [{ value: '', disabled: true }, Validators.required],
@@ -72,7 +72,6 @@ export class NovoComandaComponent implements OnInit, OnChanges {
       qtde: [0]
     });
 
-    // Observa mudanças de breakpoints para determinar se a tela é pequena
     this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.XSmall]).subscribe(result => {
       this.isSmallScreen = result.matches;
       this.modalWidth = this.isSmallScreen ? '100%' : '45%'; // Define a largura do modal com base no tamanho da tela
