@@ -70,13 +70,16 @@ export class adminApiProvider {
       url = url.replace("{idUser}", this._idUser);
       url = url.replace("{EmpresaId}", this._idEmpresa);
 
+      //url teste da api mockup
+      let urlTeste = 'https://my-json-server.typicode.com/joeder-blanca/apifake/totalMensal';
+
       return new Promise((resolve, reject) => {
-        this.httpClient.get(url,true,false).then((response : any) => {
+        this.httpClient.get(urlTeste,true,false).then((response : any) => {
           let totais: totaisModel[] = [];
-          if(JSON.stringify(response.totais) === '{}'){
+          if(JSON.stringify(response) === '{}'){
             totais = [];
           }else {
-            for(const item of response.totais){
+            for(const item of response){
               totais.push(new totaisModel().mapFromApi(item));
             }
           }

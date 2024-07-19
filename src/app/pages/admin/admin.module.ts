@@ -31,6 +31,8 @@ import { ContasComponent } from './financeiro/contas/contas.component';
 import { FluxoComponent } from './financeiro/fluxo/fluxo.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NovoFinanceiroComponent } from './financeiro/components/novo-financeiro/novo-financeiro.component';
+import { FluxoAnualComponent } from './financeiro/components/graficos/fluxo-anual/fluxo-anual.component';
+import { NgChartsModule } from 'ng2-charts'; // Importa NgChartsModule
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { NovoFinanceiroComponent } from './financeiro/components/novo-financeiro
     ContasComponent,
     FluxoComponent,
     ProfileComponent,
-    NovoFinanceiroComponent
+    NovoFinanceiroComponent,
+    FluxoAnualComponent
   ],
   imports: [
     CommonModule,
@@ -70,6 +73,7 @@ import { NovoFinanceiroComponent } from './financeiro/components/novo-financeiro
     NzSpinModule,
     FormsModule,
     ReactiveFormsModule,
+    NgChartsModule
   ]
 })
 export class AdminModule { }

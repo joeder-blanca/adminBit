@@ -14,13 +14,54 @@
     <ul nz-menu class="bg-dark text-light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <li nz-submenu nzOpen nzTitle="Financeiro" nzIcon="dollar">
         <ul class="bg-dark">
-          <li *ngFor="let item of filteredMenuItems" nz-menu-item nzMatchRouter>
+          <li *ngFor="let item of menuItems" nz-menu-item nzMatchRouter>
             <a class="text-light" [routerLink]="item.link">{{ item.title }}</a>
           </li>
         </ul>
       </li>
     </ul>
   </nz-sider>
+
+
+  <nz-drawer
+  [nzClosable]="false"
+  [nzVisible]="visible"
+  nzPlacement="left"
+  (nzOnClose)="close()"
+>
+  <ng-container *nzDrawerContent class="bg-dark">
+    <div class="row">
+      <div class="col-3">
+        <div class="sidebar-logo b">
+          <a routerLink="./index">
+            <img *ngIf="!isCollapsed" src="assets/img/logo-light-sm.png" class="" alt="logo">
+          </a>
+        </div>
+      </div>
+      <div class="col-6 d-flex align-items-end">
+        <span class="h4 text-light" style="margin-bottom: 20px;">Menu</span>
+      </div>
+    </div>
+    <div class="row">
+
+      <div class="col-12">
+        <ul nz-menu class="bg-dark text-light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+          <li nz-submenu [nzOpen]="false" nzTitle="Financeiro" nzIcon="dollar">
+            <ul class="bg-dark">
+              <li *ngFor="let item of menuItems" nz-menu-item nzMatchRouter>
+                <a class="text-light" [routerLink]="item.link">{{ item.title }}</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="col-12 d-flex justify-content-end">
+        <button class="close-button-menu" nzSize="large" nz-button (click)="close()" nzType="primary"  nzShape="circle"><i class="fa-solid fa-angles-left fa-xl"></i></button>
+      </div>
+    </div>
+    
+  </ng-container>
+</nz-drawer>
   <nz-layout class="bg-content">
     <nz-header>
       <div class="app-header bg-dark text-light">
@@ -34,12 +75,12 @@
           </span>
           </div>
           <div class="col-6 view-sm" style="display: flex; justify-content: star; align-items: center;">
-            <button class="btn btn-sm btn-none h-50 ml-30">
+            <button class="btn btn-sm btn-none h-100 ml-30 mt-3" (click)="open()">
               <i class="fa-solid fa-bars fa-xl text-secondary"></i>
             </button>
           </div>
           <div class="col-6" style="display: flex; justify-content: end; align-items: center;">
-            <button class="btn btn-sm btn-none h-50 mr-30" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+            <button class="btn btn-sm btn-none h-50 mr-30 mt-3" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
               <i class="fa-solid fa-user fa-xl text-secondary"></i>
             </button>
             <nz-dropdown-menu #menu="nzDropdownMenu">

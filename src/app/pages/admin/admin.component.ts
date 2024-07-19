@@ -29,6 +29,7 @@ export class AdminAppComponent {
   filteredMenuItems: MenuItem[] = [];
   _user: any = {};
   isCollapsed = true;
+  visible = false;
   userLabel: string = '';
 
   constructor(
@@ -37,7 +38,7 @@ export class AdminAppComponent {
   ) { }
 
   ngOnInit(): void {
-    this.obtemClaims();
+    //this.obtemClaims();
   }
 
   obtemClaims() {
@@ -65,7 +66,7 @@ export class AdminAppComponent {
   isAuthenticated(): boolean {
     if (!this.authService.loggedIn) {
       this.router.navigate(['/admin-about']);
-      return false;
+      return true;//descomentar quando estiver no backend
     }
     return true;
   }
@@ -73,5 +74,15 @@ export class AdminAppComponent {
   logout(){
     this.authService.logout();
     this.isAuthenticated();
+  }
+
+  open(): void {
+    this.visible = true;
+    this.isCollapsed = false;
+  }
+
+  close(): void {
+    this.visible = false;
+    this.isCollapsed = true;
   }
 }

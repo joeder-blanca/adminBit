@@ -115,6 +115,8 @@ nz-content {
   margin: 24px;
 }
 
-
-
-
+.close-button-menu {
+  position: absolute;
+  top: 90vh;
+  margin: 10px;
+}

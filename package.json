@@ -25,6 +25,7 @@
     "jquery": "^3.7.1",
     "moment": "^2.30.1",
     "ng-zorro-antd": "^16.2.2",
+    "ng2-charts": "^6.0.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
@@ -37,6 +38,7 @@
     "@types/jasmine": "~4.3.0",
     "@types/jquery": "^3.5.30",
     "jasmine-core": "~4.6.0",
+    "json-server": "^1.0.0-beta.1",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",

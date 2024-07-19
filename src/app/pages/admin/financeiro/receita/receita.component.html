@@ -131,12 +131,12 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let data of listFinanceiros" class="text-center">
-                        <td>{{ data.id_sf }}</td>
-                        <td>{{ data.pessoa }}</td>
-                        <td>{{ formatDate(data.data) }}</td>
-                        <td>{{ data.conta }}</td>
-                        <td>{{ data.categoria }}</td>
-                        <td>{{ formatMoeda(data.valor)}}</td>
+                        <td>{{ data.Id }}</td>
+                        <td>{{ data.PessoaOrigemId }}</td>
+                        <td>{{ formatDate(data.Data) }}</td>
+                        <td>{{ data.NomeConta }}</td>
+                        <td>{{ data.NomeCategoria }}</td>
+                        <td>{{ formatMoeda(data.Valor)}}</td>
                         <td>
                           <button class="btn btn-sm btn-danger" style="margin-right: 10px;">
                             <i class="fa-solid fa-trash-can"></i>
@@ -160,4 +160,4 @@
       <div id="slide-content"></div>
   </div> -->
 </div>
-<app-novo-financeiro [status]="visibleNovoFinanceiro" [idTipo]="1" (statusChange)="visibleNovoFinanceiro = $event"></app-novo-financeiro> -->
+<app-novo-financeiro [status]="visibleNovoFinanceiro" [idTipo]="2" (statusChange)="visibleNovoFinanceiro = $event"></app-novo-financeiro> -->
