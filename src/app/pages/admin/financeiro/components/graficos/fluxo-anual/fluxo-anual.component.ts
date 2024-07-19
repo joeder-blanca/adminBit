@@ -1,7 +1,5 @@
-// fluxo-anual.component.ts
-import { Component, OnInit } from '@angular/core';
-import { ChartOptions, ChartType, ChartData } from 'chart.js';
-import { Label } from 'ng2-charts';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { Chart, registerables } from 'chart.js';
 
 @Component({
   selector: 'app-fluxo-anual',
@@ -9,29 +7,12 @@ import { Label } from 'ng2-charts';
   styleUrls: ['./fluxo-anual.component.css']
 })
 export class FluxoAnualComponent implements OnInit {
-  public barChartOptions: ChartOptions<'bar'> = {
-    responsive: true,
-    scales: {
-      x: {
-        stacked: true
-      },
-      y: {
-        stacked: true,
-        beginAtZero: true
-      }
-    }
-  };
-  public barChartLabels: Label[] = [];
-  public barChartData: ChartData<'bar'> = {
-    labels: this.barChartLabels,
-    datasets: []
-  };
-  public barChartType: ChartType = 'bar';
+  @ViewChild('fluxoAnual', { static: true }) elemento!: ElementRef;
 
-  listFluxo: any = [];
-
+  data: any = [];
 
   ngOnInit(): void {
+    Chart.register(...registerables); 
     const listFake = [
       {
           "Categoria": "Receitas",
@@ -109,59 +90,77 @@ export class FluxoAnualComponent implements OnInit {
           "Dez": 65.00
       }
   ]
-    this.listFluxo = listFake;
-    this.populateChart(this.listFluxo);
+      this.data = listFake;
+      this.createChart(this.data);
   }
 
-  private populateChart(data: any[]): void {
+  private createChart(data: any[]): void {
+    const months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
     const categories = ['Receitas', 'Despesas', 'Vendas/Serviços', 'Lucro Bruto', 'Saldo'];
-    this.barChartLabels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
 
-    this.barChartData.datasets = categories.map(categoria => {
-      return {
-        data: this.barChartLabels.map(mes => {
-          const item = data.find(d => d.Categoria === categoria);
-          return item ? item[mes] : 0;
-        }),
-        label: categoria,
-        backgroundColor: this.getColorForCategory(categoria),
-        borderColor: this.getBorderColorForCategory(categoria),
-        borderWidth: 1
-      };
+    const datasets = categories.map(categoria => ({
+      data: months.map(mes => {
+        const item = data.find(d => d.Categoria === categoria);
+        return item ? item[mes] : 0;
+      }),
+      label: categoria,
+      backgroundColor: this.getColorForCategory(categoria),
+      borderColor: this.getBorderColorForCategory(categoria),
+      borderWidth: 1,
+      fill: false
+    }));
+
+    new Chart(this.elemento.nativeElement, {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: datasets
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            beginAtZero: true
+          },
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
     });
   }
 
   private getColorForCategory(categoria: string): string {
     switch (categoria) {
       case 'Receitas':
-        return 'rgba(40, 167, 69, 0.2)'; // Cor verde
+        return 'rgba(40, 167, 69, 0.2)';
       case 'Despesas':
-        return 'rgba(220, 53, 69, 0.2)'; // Cor vermelha
+        return 'rgba(220, 53, 69, 0.2)';
       case 'Vendas/Serviços':
-        return 'rgba(23, 162, 184, 0.2)'; // Cor azul
+        return 'rgba(23, 162, 184, 0.2)';
       case 'Lucro Bruto':
-        return 'rgba(255, 193, 7, 0.2)'; // Cor amarela
+        return 'rgba(255, 193, 7, 0.2)';
       case 'Saldo':
-        return 'rgba(255, 255, 255, 0.2)'; // Cor branca
+        return 'rgba(255, 255, 255, 0.2)';
       default:
-        return 'rgba(0, 0, 0, 0.2)'; // Cor padrão
+        return 'rgba(0, 0, 0, 0.2)';
     }
   }
 
   private getBorderColorForCategory(categoria: string): string {
     switch (categoria) {
       case 'Receitas':
-        return 'rgba(40, 167, 69, 1)'; // Cor verde
+        return 'rgba(40, 167, 69, 1)';
       case 'Despesas':
-        return 'rgba(220, 53, 69, 1)'; // Cor vermelha
+        return 'rgba(220, 53, 69, 1)';
       case 'Vendas/Serviços':
-        return 'rgba(23, 162, 184, 1)'; // Cor azul
+        return 'rgba(23, 162, 184, 1)';
       case 'Lucro Bruto':
-        return 'rgba(255, 193, 7, 1)'; // Cor amarela
+        return 'rgba(255, 193, 7, 1)';
       case 'Saldo':
-        return 'rgba(255, 255, 255, 1)'; // Cor branca
+        return 'rgba(255, 255, 255, 1)';
       default:
-        return 'rgba(0, 0, 0, 1)'; // Cor padrão
+        return 'rgba(0, 0, 0, 1)';
     }
   }
 }

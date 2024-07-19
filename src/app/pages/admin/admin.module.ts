@@ -32,7 +32,11 @@ import { FluxoComponent } from './financeiro/fluxo/fluxo.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NovoFinanceiroComponent } from './financeiro/components/novo-financeiro/novo-financeiro.component';
 import { FluxoAnualComponent } from './financeiro/components/graficos/fluxo-anual/fluxo-anual.component';
-import { NgChartsModule } from 'ng2-charts'; // Importa NgChartsModule
+import { PlanejamentoComponent } from './financeiro/planejamento/planejamento.component';
+import { MetaAnualComponent } from './financeiro/components/graficos/meta-anual/meta-anual.component';
+import { MetaReceitaComponent } from './financeiro/components/graficos/meta-receita/meta-receita.component';
+import { MetaDespesaComponent } from './financeiro/components/graficos/meta-despesa/meta-despesa.component';
+import { CategoriaAnualComponent } from './financeiro/components/graficos/categoria-anual/categoria-anual.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,12 @@ import { NgChartsModule } from 'ng2-charts'; // Importa NgChartsModule
     FluxoComponent,
     ProfileComponent,
     NovoFinanceiroComponent,
-    FluxoAnualComponent
+    FluxoAnualComponent,
+    PlanejamentoComponent,
+    MetaAnualComponent,
+    MetaReceitaComponent,
+    MetaDespesaComponent,
+    CategoriaAnualComponent
   ],
   imports: [
     CommonModule,
@@ -73,7 +82,6 @@ import { NgChartsModule } from 'ng2-charts'; // Importa NgChartsModule
     NzSpinModule,
     FormsModule,
     ReactiveFormsModule,
-    NgChartsModule
   ]
 })
 export class AdminModule { }

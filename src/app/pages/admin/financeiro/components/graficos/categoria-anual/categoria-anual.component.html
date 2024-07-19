@@ -1,0 +1,14 @@
+<div>
+    <div class="row">
+      <div class="col-12 d-flex justify-content-end">
+        <button class="btn btn-sm bg-primary-light text-muted" (click)="toggleView()">
+          <i class="fa-solid fa-retweet"></i>
+          {{ currentView === 'despesas' ? 'Mostrar Receitas' : 'Mostrar Despesas' }}
+        </button>
+      </div>
+      <div class="col-12">
+        <canvas #categoriaAnual height="50"></canvas> 
+      </div>
+    </div>
+  </div>
+  

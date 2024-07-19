@@ -1,0 +1,26 @@
+::ng-deep .custom-select .ant-select-selector {
+    background-color: #343a40; /* Cor de fundo escura (exemplo: cinza escuro) */
+    color: #fff; /* Cor do texto */
+  }
+  
+  ::ng-deep .custom-select .ant-select-item-option-content {
+    color: #fff; /* Cor do texto do item */
+  }
+  
+  ::ng-deep .custom-select .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+    background-color: #495057; /* Cor de fundo do item selecionado (exemplo: cinza mais escuro) */
+  }
+  
+  ::ng-deep .custom-select .ant-select-dropdown {
+    background-color: #343a40; /* Cor de fundo da dropdown */
+    color: #fff; /* Cor do texto na dropdown */
+  }
+  
+  ::ng-deep .custom-select .ant-select-item-option {
+    color: #fff; /* Cor do texto dos itens na dropdown */
+  }
+  
+  ::ng-deep .custom-select .ant-select-item-option-active {
+    background-color: #495057; /* Cor de fundo ao passar o mouse */
+  }
+  

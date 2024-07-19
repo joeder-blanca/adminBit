@@ -1,0 +1,15 @@
+.position-relative {
+    position: relative;
+  }
+  
+  .position-absolute {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff; 
+    font-size: 1rem; 
+    font-weight: bold; 
+    text-align: center; 
+  }
+  

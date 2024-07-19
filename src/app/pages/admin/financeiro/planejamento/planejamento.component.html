@@ -1,0 +1,141 @@
+<!-- <nz-modal [(nzVisible)]="visibleMenu" nzTitle="Selecione um tipo de Receita" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzFooter]="null">
+  <ng-container *nzModalContent>
+    <div class="row" style="margin-top: 10px;">
+      <div class="col-6"><button class="btn btn-danger w-100 h-100" (click)="abrirNovoFinanceiro();"><i class="fa-solid fa-check"></i> SIMPLES</button></div>
+      <div class="col-6"><button class="btn btn-danger w-100 h-100"><i class="fa-solid fa-check-double"></i> COMPLETA</button></div>
+    </div>
+  </ng-container>
+</nz-modal> -->
+
+<div class="row">
+  <div class="col-12 hidden-sm"><span class="h2 text-light">Planejamento</span><p class="text-info"><small>Mês: Julho</small></p>
+  </div>
+  <div class="col-md-4 col-xl-12 col-12 mb-3">
+    <div class="card shadow text-right bg-dark-light h-100">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-xl-6 col-md-6 col-12 h-100 d-flex align-items-end">
+            <div class="row text-light">
+              <div class="col-6  text-center">
+                  <div class="card bg-dark-light">
+                    <div class="card-body">
+                      <span>Receitas</span>
+                      <div class="row">
+                        <div class="col-6">
+                                                    
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-6 text-center">
+                <div class="card bg-dark-light">
+                  <div class="card-body">
+                    <span>Despesas</span>
+                    <div class="row">
+                      <div class="col-6">
+                                          
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+              <div class="col-6">
+                  <app-meta-receita></app-meta-receita>
+              </div>
+              <div class="col-6">
+                  <app-meta-despesa></app-meta-despesa>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-6 col-md-12 col-12 mt-4">
+              <app-meta-anual></app-meta-anual>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <nz-drawer
+      [nzClosable]="false"
+      [nzVisible]="visible"
+      nzPlacement="right"
+      (nzOnClose)="close()"
+    >
+      <ng-container *nzDrawerContent class="bg-dark">
+        <span class="h4 text-light" style="margin-bottom: 20px;">Filtros</span>
+        <form [formGroup]="searchForm">
+          <div class="row" style="display: flex; align-items: end;">
+            <div class="col-6 text-light mb-3">
+              <div class="inner-box">
+                <label>De:</label>
+                <nz-date-picker formControlName="dataDe"
+                  (ngModelChange)="onChange($event)"
+                  [nzFormat]="'dd/MM/yyyy HH:mm:ss'"
+                  style="width: 100%;">
+                </nz-date-picker>
+              </div>
+            </div>
+            <div class="col-6 text-light mb-3">
+              <div class="inner-box">
+                <label>Até:</label>
+                <nz-date-picker formControlName="dataAte"
+                  (ngModelChange)="onChange($event)"
+                  [nzFormat]="'dd/MM/yyyy HH:mm:ss'"
+                  style="width: 100%;">
+                </nz-date-picker>
+              </div>
+            </div>
+            <div class="col-12 text-light mb-3">
+              <div class="inner-box">
+                <label>Pessoa</label><br>
+                <nz-select formControlName="pessoa" class="w-100" nzAllowClear nzPlaceHolder="Selecionar pessoa">
+                  <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+                </nz-select>
+              </div>
+            </div>
+            <div class="col-12 text-light mb-3">
+              <div class="inner-box">
+                <label>Conta</label>
+                <nz-select formControlName="conta" class="w-100" nzAllowClear nzPlaceHolder="Selecione conta">
+                  <nz-option nzValue="1" nzLabel="Banco Inter"></nz-option>
+                  <nz-option nzValue="2" nzLabel="Banco Bradesco"></nz-option>
+                </nz-select>
+              </div>
+            </div>
+            <div class="col-12 text-light mb-3">
+              <div class="inner-box">
+                <label>Categoria</label>
+                <nz-select formControlName="categoria" class="w-100" nzAllowClear nzPlaceHolder="Selecione categoria">
+                  <nz-option nzValue="1" nzLabel="Banco Inter"></nz-option>
+                  <nz-option nzValue="2" nzLabel="Banco Bradesco"></nz-option>
+                </nz-select>
+              </div>
+            </div>
+            <div class="col-12 text-light text-center mb-3">
+              <button class="btn btn-sm btn-danger"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+            </div>
+          </div>
+        </form>
+      </ng-container>
+    </nz-drawer> -->
+  </div>
+  <div class="col-12 hidden-sm"><hr class="text-muted"></div>
+  <div class="col-12 hidden-sm">
+    <div class="row">
+      <div class="col-md-12 col-xl-12 col-12 mb-3">
+        <div class="card shadow bg-dark-light">
+          <div class="card-body ">
+            <div class="row align-items-center">
+              <div class="col-12" >
+                <app-categoria-anual></app-categoria-anual>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- <div class="col-12">
+        <div id="slide-content"></div>
+    </div> -->
+</div>
+  
