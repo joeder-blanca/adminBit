@@ -1,6 +1,7 @@
 // fluxo-anual.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartData } from 'chart.js';
+import { Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-fluxo-anual',
@@ -20,7 +21,7 @@ export class FluxoAnualComponent implements OnInit {
       }
     }
   };
-  public barChartLabels: any[] = [];
+  public barChartLabels: Label[] = [];
   public barChartData: ChartData<'bar'> = {
     labels: this.barChartLabels,
     datasets: []
