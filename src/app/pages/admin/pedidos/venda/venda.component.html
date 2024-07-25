@@ -1,0 +1,190 @@
+<div class="row">
+    <div class="col-12 t-sml">
+      <span class="h2 text-light">Vendas</span>
+      <p class="text-info">
+        <small>{{ periodoFiltro }}</small>
+      </p>
+    </div>
+    <div class="col-md-4 col-xl-3 col-6 mb-3">
+      <div class="card shadow bg-info-light">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col">
+              <p class="small text-muted mb-0">Total</p>
+              <span class="h4 mb-0 text-light t-sm">{{ vrVendas }}</span
+              ><br />
+            </div>
+            <div class="col-auto hidden-sm">
+              <i class="fa-solid fa-sack-dollar fa-2xl text-info"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-xl-9 col-6 mb-3 d-flex justify-content-end">
+      <div class="card shadow w-100 text-right h-100 bg-dark-light">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-xl-2 col-md-6 col-sm-6 col-6">
+              <button
+                class="btn btn-sm btn-info w-100 t-sm"
+                style="margin-right: 10px"
+                (click)="openMenu()"
+              >
+                <i class="fa-solid fa-square-plus"></i> Novo
+              </button>
+            </div>
+            <div class="col-xl-2 col-md-6 col-sm-6 col-6">
+              <button
+                class="btn btn-sm btn-info w-100 t-sm"
+                (click)="openFilter()"
+              >
+                <i class="fa-solid fa-filter"></i> Filrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 hidden-sm"><hr class="text-muted"></div>
+  <div class="col-12">
+    <div class="row">
+      <div class="col-md-12 col-xl-12 col-12 mb-3">
+        <div class="card shadow bg-dark-light">
+          <div class="card-body ">
+            <div class="row align-items-center">
+              <div class="col">
+                <div class="table-responsive">
+                  <table class="table table-dark table-bordered table-striped table-hover display" id="example">
+                    <thead>
+                      <tr>
+                        <th class="text-center hidden-sm"> Cod.:</th>
+                        <th class="text-center"> Fornecedor</th>
+                        <th class="text-center"> Data</th>
+                        <th class="text-center"> Valor(R$)</th>
+                        <th class="text-center"> Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of listVendas" class="text-center">
+                        <td>{{ data.Id }}</td>
+                        <td>{{ data.PessoaOrigemId }}</td>
+                        <td>{{ formatDate(data.Data) }}</td>
+                        <td>{{ formatMoeda(data.Valor)}}</td>
+                        <td>
+                          <button class="btn btn-sm btn-danger" style="margin-right: 10px;">
+                            <i class="fa-solid fa-trash-can"></i>
+                          </button>
+                          <button class="btn btn-sm btn-warning">
+                            <i class="fa-solid fa-pen"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <nz-drawer
+    [nzClosable]="false"
+    [nzVisible]="visibleFiltro"
+    nzPlacement="right"
+    (nzOnClose)="closeFilter()"
+  >
+    <ng-container *nzDrawerContent class="bg-dark">
+      <div class="row">
+        <div class="col-11">
+          <span class="h4 text-light" style="margin-bottom: 20px">Filtros</span>
+        </div>
+        <div class="col-1">
+          <span class="text-danger" (click)="closeFilter()"
+            ><strong
+              ><button class="btn btn-sm btn-danger">X</button></strong
+            ></span
+          >
+        </div>
+      </div>
+      <form [formGroup]="searchForm">
+        <div class="row" style="display: flex; align-items: end">
+          <div class="col-6 text-light mb-3">
+            <div class="inner-box">
+              <label>De:</label>
+              <nz-date-picker
+                formControlName="dataDe"
+                (ngModelChange)="onChange($event)"
+                [nzFormat]="'dd/MM/yyyy HH:mm:ss'"
+                style="width: 100%"
+              >
+              </nz-date-picker>
+            </div>
+          </div>
+          <div class="col-6 text-light mb-3">
+            <div class="inner-box">
+              <label>Até:</label>
+              <nz-date-picker
+                formControlName="dataAte"
+                (ngModelChange)="onChange($event)"
+                [nzFormat]="'dd/MM/yyyy HH:mm:ss'"
+                style="width: 100%"
+              >
+              </nz-date-picker>
+            </div>
+          </div>
+          <div class="col-12 text-light mb-3">
+            <div class="inner-box">
+              <label>Pessoa</label><br />
+              <nz-select
+                formControlName="pessoa"
+                class="w-100"
+                nzAllowClear
+                nzPlaceHolder="Selecionar pessoa"
+              >
+                <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+              </nz-select>
+            </div>
+          </div>
+          <div class="col-12 text-light mb-3">
+            <div class="inner-box">
+              <label>Conta</label>
+              <nz-select
+                formControlName="conta"
+                class="w-100"
+                nzAllowClear
+                nzPlaceHolder="Selecione conta"
+              >
+                <nz-option nzValue="1" nzLabel="Banco Inter"></nz-option>
+                <nz-option nzValue="2" nzLabel="Banco Bradesco"></nz-option>
+              </nz-select>
+            </div>
+          </div>
+          <div class="col-12 text-light mb-3">
+            <div class="inner-box">
+              <label>Categoria</label>
+              <nz-select
+                formControlName="categoria"
+                class="w-100"
+                nzAllowClear
+                nzPlaceHolder="Selecione categoria"
+              >
+                <nz-option nzValue="1" nzLabel="Banco Inter"></nz-option>
+                <nz-option nzValue="2" nzLabel="Banco Bradesco"></nz-option>
+              </nz-select>
+            </div>
+          </div>
+          <div class="col-12 text-light text-center mb-3">
+            <button class="btn btn-sm btn-success">
+              <i class="fa-solid fa-magnifying-glass"></i> Buscar
+            </button>
+          </div>
+        </div>
+      </form>
+    </ng-container>
+  </nz-drawer>
+  

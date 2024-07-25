@@ -37,6 +37,14 @@ import { MetaAnualComponent } from './financeiro/components/graficos/meta-anual/
 import { MetaReceitaComponent } from './financeiro/components/graficos/meta-receita/meta-receita.component';
 import { MetaDespesaComponent } from './financeiro/components/graficos/meta-despesa/meta-despesa.component';
 import { CategoriaAnualComponent } from './financeiro/components/graficos/categoria-anual/categoria-anual.component';
+import { VendaComponent } from './pedidos/venda/venda.component';
+import { CompraComponent } from './pedidos/compra/compra.component';
+import { DashboardComponent } from './pedidos/dashboard/dashboard.component';
+import { CadastroComponent } from './configuracoes/cadastro/cadastro.component';
+import { ComercioAnualComponent } from './financeiro/components/graficos/comercio-anual/comercio-anual.component';
+import { PainelComponent } from './pdv/painel/painel.component';
+import { HomeComponent } from './pdv/home/home.component';
+import { PagarComponent } from './pdv/painel/components/pagar/pagar.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +61,15 @@ import { CategoriaAnualComponent } from './financeiro/components/graficos/catego
     MetaAnualComponent,
     MetaReceitaComponent,
     MetaDespesaComponent,
-    CategoriaAnualComponent
+    CategoriaAnualComponent,
+    VendaComponent,
+    CompraComponent,
+    DashboardComponent,
+    CadastroComponent,
+    ComercioAnualComponent,
+    PainelComponent,
+    HomeComponent,
+    PagarComponent
   ],
   imports: [
     CommonModule,

@@ -18,13 +18,28 @@ interface MenuItem {
 })
 export class AdminAppComponent {
 
-  menuItems: MenuItem[] = [
+  menuFinanceiro: MenuItem[] = [
     { title: 'Receitas', link: './receitas', claim: 'STANDARD' },
     { title: 'Despesas', link: './despesas', claim: 'STANDARD' },
     { title: 'Pagar/Receber', link: './contas', claim: 'STANDARD' },
     { title: 'Fluxo de Caixa', link: './fluxo', claim: 'STANDARD' },
     { title: 'Planejamento', link: './planejamento', claim: 'STANDARD' }
   ];
+
+  menuPedidos: MenuItem[] = [
+    { title: 'Dashboard', link: './dashboard', claim: 'STANDARD' },
+    { title: 'Compras', link: './compra', claim: 'STANDARD' },
+    { title: 'Vendas', link: './venda', claim: 'STANDARD' },
+  ];
+
+  menuPDV: MenuItem[] = [
+    { title: 'Caixas', link: './pdv', claim: 'STANDARD' },
+  ];
+
+  menuCadastros: MenuItem[] = [
+    { title: 'Cadastros', link: './cadastros', claim: 'STANDARD' },
+  ];
+  
 
   filteredMenuItems: MenuItem[] = [];
   _user: any = {};
@@ -52,7 +67,7 @@ export class AdminAppComponent {
         const standardRoles = this._user.claims.some((claim: any) => claim.type === 'role' && claim.value === 'STANDARD');
   
         if (standardRoles) {
-          this.filteredMenuItems = this.menuItems.filter(item => item.claim === 'STANDARD');
+          this.filteredMenuItems = this.menuFinanceiro.filter(item => item.claim === 'STANDARD');
         }
       } else {
         console.error('Estrutura do token de usuário inválida:', this._user);
@@ -64,10 +79,10 @@ export class AdminAppComponent {
   
 
   isAuthenticated(): boolean {
-    if (!this.authService.loggedIn) {
-      this.router.navigate(['/admin-about']);
-      return true;//descomentar quando estiver no backend
-    }
+    // if (!this.authService.loggedIn) {
+    //   this.router.navigate(['/admin-about']);
+    //   return true;
+    // }
     return true;
   }
 

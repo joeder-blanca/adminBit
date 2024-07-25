@@ -1,57 +1,58 @@
 <div class="row">
+  <div class="col-12 d-flex justify-content-end">
+    <button class="btn btn-primary  mr-10" title="Notificações"><i class="fa-solid fa-bell"></i></button>
+    <button class="btn btn-primary  mr-10" title="Atalhos Rápidos"><i class="fa-solid fa-table"></i></button>
+  </div>
   <div class="col-12">
     <span class="h4 text-light">Seja bem vindo... </span><br>
     <small class="text-muted">Acesso Rápido</small>
   </div>
   <div class="col-12">
     <div class="row">
-      <div class=" col-xl-2 col-md-2 col-sm-6 col-6 mt-3 ">
-        <button class="btn btn-sm btn-primary w-100" [routerLink]="links.receitas" routerLinkActive="router-link-active" >
-          <div class="row">
-            <div class="col-3 d-center"><i class="fa-solid fa-square-plus"style=" padding-left: 10px;"></i></div>
-            <div class="col-9 d-start">Financeiro</div>
+      <div class=" col-xl-4 col-md-6 col-sm-12 col-12 mt-3 ">
+        <div class="card bg-dark-light">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-4">
+                propaganda 1
+              </div>
+            </div>
           </div>
-        </button>
+        </div>
       </div>
-      <div class=" col-xl-2 col-md-2 col-sm-6 col-6 mt-3 ">
-        <button class="btn btn-sm btn-primary w-100">
-          <div class="row">
-            <div class="col-3 d-center"><i class="fa-solid fa-square-plus"style="padding-left: 10px;"></i></div>
-            <div class="col-9 d-start">Venda</div>
+      <div class=" col-xl-8 col-md-6 col-sm-12 col-12 mt-3 ">
+        <div class="card bg-dark-light">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                propaganda 2
+              </div>
+            </div>
           </div>
-        </button>
+        </div>
       </div>
-      <div class=" col-xl-2 col-md-2 col-sm-6 col-6 mt-3 ">
-        <button class="btn btn-sm btn-primary w-100">
-          <div class="row">
-            <div class="col-3 d-center"><i class="fa-solid fa-square-plus"style="padding-left: 10px;"></i></div>
-            <div class="col-9 d-start">Compra</div>
+      <div class=" col-xl-6 col-md-6 col-sm-12 col-12 mt-3">
+        <div class="card bg-dark-light h-100">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                <app-fluxo-anual></app-fluxo-anual>
+              </div>
+            </div>
           </div>
-        </button>
+        </div>
       </div>
-      <div class=" col-xl-2 col-md-2 col-sm-6 col-6 mt-3 ">
-        <button class="btn btn-sm btn-primary w-100">
-          <div class="row">
-            <div class="col-3 d-center"><i class="fa-solid fa-cash-register"style="padding-left: 10px;"></i></div>
-            <div class="col-9 d-start">PDV</div>
+      <div class=" col-xl-6 col-md-6 col-sm-12 col-12 mt-3">
+        <div class="card bg-dark-light h-100">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                <app-categoria-anual></app-categoria-anual>
+              
+              </div>
+            </div>
           </div>
-        </button>
-      </div>
-      <div class=" col-xl-2 col-md-2 col-sm-6 col-6 mt-3 ">
-        <button class="btn btn-sm btn-primary w-100">
-          <div class="row">
-            <div class="col-3 d-center"><i class="fa-solid fa-chart-pie"style="padding-left: 10px;"></i></div>
-            <div class="col-9 d-start">Fluxo</div>
-          </div>
-        </button>
-      </div>
-      <div class=" col-xl-2 col-md-2 col-sm-6 col-6 mt-3 ">
-        <button class="btn btn-sm btn-primary w-100">
-          <div class="row">
-            <div class="col-3 d-center"><i class="fa-solid fa-file-export"style="padding-left: 10px;"></i></div>
-            <div class="col-9 d-start">Relatórios</div>
-          </div>
-        </button>
+        </div>
       </div>
     </div>
   </div>

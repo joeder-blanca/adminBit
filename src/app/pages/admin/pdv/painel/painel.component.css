@@ -1,0 +1,26 @@
+.card-pdv-app{
+    height: 600px;
+}
+
+.w-btn-final{
+    width: 20%;
+}
+
+.w-card-final{
+    text-align: right !important;
+}
+
+@media (max-width: 768px) {
+    .card-pdv-app{
+        height: 380px;
+    }
+
+    .w-btn-final{
+        width: 100%;
+    }
+
+    .p-r-sm-0{
+        padding-right: 12px;
+    }
+
+}

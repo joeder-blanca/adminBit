@@ -1,15 +1,15 @@
 import { AuthService } from './../../shared/services/auth.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-
+import { Router, NavigationEnd, Event } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   validateForm: FormGroup<{
     userName: FormControl<string>;
     password: FormControl<string>;
@@ -18,50 +18,41 @@ export class LoginComponent {
     password: ['', [Validators.required]],
   });
 
+  page: string = '';
+
   responseLogin: any;
 
   constructor(
     private fb: NonNullableFormBuilder,
-    private authService : AuthService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
+  ngOnInit() {
+    this.updatePageValue();
+  }
+
+  private updatePageValue() {
+    if(this.router.url === '/admin-about'){
+      this.page = 'ADMIN';
+    }else if(this.router.url === '/dinner-about'){
+      this.page = 'DINNER';
+    }
+    
+  }
+
+  logar() {
+    this.router.navigate(['/admin/index']);
+  }
 
   submitForm(): void {
     const userName = this.validateForm.get('userName')!.value;
     const password = this.validateForm.get('password')!.value;
-    // const usuario: any = {
-    //   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
-    //   "usuarioToken": {
-    //     "id": 123,
-    //     "id_empresa": 456,
-    //     "username": "johndoe",
-    //     "claims": [
-    //       { "type": "role", "value": "STANDARD" },
-    //       { "type": "permission", "value": "read" },
-    //       { "type": "permission", "value": "write" }
-    //     ]
-    //   }
-    // };
 
-    // localStorage.setItem('bitADMIN.user', JSON.stringify(usuario));
-
-    // this.router.navigate(['/admin/index']);
-
-    if (this.validateForm.valid) {
-      this.authService.login(userName, password)
-      .subscribe({
-        next: (v) => this.processarSucesso(v),
-        error: (e) => this.processarFalha(e),
-        complete: () => console.info('complete')
-      });
-    } else {
-      Object.values(this.validateForm.controls).forEach(control => {
-        if (control.invalid) {
-          control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
-        }
-      });
+    if(this.router.url === '/admin-about'){
+      this.router.navigate(['/admin/index']);
+    }else if(this.router.url === '/dinner-about'){
+      this.router.navigate(['/dinner/index']);
     }
   }
 
@@ -69,33 +60,23 @@ export class LoginComponent {
     this.responseLogin = response;
     this.authService.LocalStorage.salvarDadosLocaisUsuario(response);
     this.router.navigate(['/admin/index']);
-
   }
 
   processarFalha(fail: any) {
-    //this.loading = false;
     if (fail.error) {
       if (fail.error.errors.Senha) {
         for (let erro of fail.error.errors.Senha) {
-          console.log('erro 1 ->', erro)
-          //notify(erro, 'error', 3000);
+          console.log('erro 1 ->', erro);
         }
       }
 
       if (fail.error.errors.Mensagens) {
         for (let erro of fail.error.errors.Mensagens) {
-          //notify(erro, 'error', 3000);
-          console.log('erro 2 ->', erro)
+          console.log('erro 2 ->', erro);
         }
       }
     } else {
-      //notify(fail, 'error', 3000);
-      console.log('erro 3 ->', fail)
+      console.log('erro 3 ->', fail);
     }
-
-
   }
-
-
-
 }
