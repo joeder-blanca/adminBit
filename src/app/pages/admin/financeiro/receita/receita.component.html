@@ -15,7 +15,7 @@
         <div class="row align-items-center">
           <div class="col">
             <p class="small text-muted mb-0">Total</p>
-            <span class="h4 mb-0 text-light t-sm">{{vrReceitas}}</span><br>
+            <span class="h4 mb-0 text-light t-sm">{{formatMoeda(vrReceitas)}}</span><br>
           </div>
           <div class="col-auto hidden-sm">
             <i class="fa-solid fa-sack-dollar fa-2xl text-success"></i>
@@ -28,6 +28,7 @@
     <div class="card shadow w-100 text-right h-100 bg-dark-light">
       <div class="card-body">
         <div class="row">
+          <div class="col-8"></div>
           <div class=" col-xl-2 col-md-6 col-sm-6 col-6">
             <button class="btn btn-sm btn-success w-100 t-sm" style="margin-right: 10px;" (click)="abrirMenu();"><i class="fa-solid fa-square-plus"></i> Novo</button>
           </div>
@@ -131,11 +132,11 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let data of listFinanceiros" class="text-center">
-                        <td>{{ data.Id }}</td>
-                        <td>{{ data.PessoaOrigemId }}</td>
+                        <td>{{ data.SfId}}</td>
+                        <td>{{ data.PessoaOrigem }}</td>
                         <td>{{ formatDate(data.Data) }}</td>
-                        <td>{{ data.NomeConta }}</td>
-                        <td>{{ data.NomeCategoria }}</td>
+                        <td>{{ data.Conta }}</td>
+                        <td>{{ data.Categoria }}</td>
                         <td>{{ formatMoeda(data.Valor)}}</td>
                         <td>
                           <button class="btn btn-sm btn-danger" style="margin-right: 10px;">
@@ -160,4 +161,4 @@
       <div id="slide-content"></div>
   </div> -->
 </div>
-<app-novo-financeiro [status]="visibleNovoFinanceiro" [idTipo]="2" (statusChange)="visibleNovoFinanceiro = $event"></app-novo-financeiro> -->
+<app-novo-financeiro (financeiroAdded)="onFinanceiroAdded()" [status]="visibleNovoFinanceiro" [idTipo]="2" (statusChange)="visibleNovoFinanceiro = $event"></app-novo-financeiro> -->

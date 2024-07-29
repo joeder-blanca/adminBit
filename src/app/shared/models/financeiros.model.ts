@@ -1,5 +1,5 @@
 export class financeirosModel {
-    public Id!: number;
+    public SfId!: number;
     public UserIncId!: number;
     public PessoaOrigemId!: number;
     public EmpresaId!: number;
@@ -9,17 +9,18 @@ export class financeirosModel {
     public ContaId!: number;
     public CategoriaId!: number;
     public Tipo!: string;
-    public NomePessoaOrigem!: string;
-    public NomeOrigem!: string;
-    public NomeCategoria!: string;
-    public NomeConta!: string;
-    public NomeTipo!: string;
+    public PessoaOrigem!: string;
+    public Origem!: string;
+    public Categoria!: string;
+    public Conta!: string;
+    public TipoDescricao!: string;
     public Descricao!: string;
     public Obs!: string;
     public Valor!: number;
+    public Dt_inc!: Date;
 
     public mapFromApi(item: any): financeirosModel {
-        this.Id = item.Id;
+        this.SfId = item.SfId;
         this.UserIncId = item.UserIncId;
         this.PessoaOrigemId = item.PessoaOrigemId;
         this.EmpresaId = item.EmpresaId;
@@ -29,14 +30,15 @@ export class financeirosModel {
         this.ContaId = item.ContaId;
         this.CategoriaId = item.CategoriaId;
         this.Tipo = item.Tipo;
-        this.NomePessoaOrigem = item.NomePessoaOrigem;
-        this.NomeOrigem = item.NomeOrigem;
-        this.NomeCategoria = item.NomeCategoria;
-        this.NomeConta = item.NomeConta;
-        this.NomeTipo = item.NomeTipo;
+        this.PessoaOrigem = item.PessoaOrigem;
+        this.Origem = item.Origem;
+        this.Categoria = item.Categoria;
+        this.Conta = item.Conta;
+        this.TipoDescricao = item.TipoDescricao;
         this.Descricao = item.Descricao;
         this.Obs = item.Obs;
         this.Valor = item.Valor;
+        this.Dt_inc = new Date(item.Dt_inc);
 
         return this;
     }

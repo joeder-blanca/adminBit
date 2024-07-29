@@ -60,6 +60,12 @@
   align-items: center !important;
 }
 
+.d-right {
+  display: flex !important;
+  justify-content: right !important;
+  align-items: center !important;
+}
+
 .d-start {
   display: flex !important;
   justify-content: start !important;

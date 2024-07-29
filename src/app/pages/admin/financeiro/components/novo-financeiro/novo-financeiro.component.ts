@@ -8,6 +8,8 @@ import { categoriasModel } from 'src/app/shared/models/categorias.model';
 import { metodoModel } from 'src/app/shared/models/metodo.model';
 import { format } from 'date-fns';
 import { error } from 'jquery';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { AlertMessageComponent } from '../alert-message/alert-message.component';
 
 @Component({
   selector: 'app-novo-financeiro',
@@ -18,6 +20,7 @@ export class NovoFinanceiroComponent {
   @Input('status') statusModal!: boolean;
   @Input('idTipo') idTipo!: number;
   @Output() statusChange = new EventEmitter<boolean>();
+  @Output() financeiroAdded = new EventEmitter<void>();
 
   //variaveis
   public modalWidth: string = '45%';
@@ -36,16 +39,16 @@ export class NovoFinanceiroComponent {
   listCategorias: any = [];
   listMetodo: any = [];
 
-
-
   selectedValue = null;
 
   financeiroForm: FormGroup;
 
+
   constructor(
     private _fb: FormBuilder,
     private _breakpointObserver: BreakpointObserver,
-    public _adminApi: adminApiProvider
+    public _adminApi: adminApiProvider,
+    private notification: NzNotificationService
   ) {
     const dtIncFormatted = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
     this.financeiroForm = this._fb.group({
@@ -135,60 +138,60 @@ export class NovoFinanceiroComponent {
   }
 
   
-async novoFinanceiro(tipo: String): Promise<void> {
-  if (
-    this.financeiroForm.invalid ||
-    this.financeiroForm.get('valor')?.value === null ||
-    this.financeiroForm.get('valor')?.value === ''
-
-    
-  ) {
-    Object.values(this.financeiroForm.controls).forEach(control => {
-      control.markAsTouched();
-    });
-    return;
-  }
-
-  const userJson = localStorage.getItem('bitADMIN.user');
-  if (userJson) {
-    const _user = JSON.parse(userJson);
-    const user = _user.id;
-    const empresa = _user.id_empresa;
-
-    const { valor, ...formValues } = this.financeiroForm.value;
-    const dtVencFormatted = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
-    
-    const formattedValues = {
-      financeiro: {
-        ...formValues,
-        UserIncId: user,
-        Tipo: tipo,
-        OrigemId: 1,
-        IntervaloId: 1,
-        FormaId: 13
-      },
-      parcelas: [
-        {
-          EmpresaId: 1,
-          UserIncId: user,
-          Valor: valor,
-          Dt_venc: dtVencFormatted,
-          Status: 'A'
-        }
-      ]
-    };    
-      await this._adminApi.postFinanceiro(formattedValues).then(success =>{
-        //console.log('ok');
-
-        //colocar alerta
-      }).catch(error =>{
-        console.log("Erro na chamada post, response: " + error)
+  async novoFinanceiro(tipo: String): Promise<void> {
+    if (
+      this.financeiroForm.invalid ||
+      this.financeiroForm.get('valor')?.value === null ||
+      this.financeiroForm.get('valor')?.value === ''
+    ) {
+      Object.values(this.financeiroForm.controls).forEach(control => {
+        control.markAsTouched();
       });
-   
-  } else {
-    console.error('Erro: Não foi possível obter os dados do usuário para envio.');
+      return;
+    }
+
+    const userJson = localStorage.getItem('bitADMIN.user');
+    if (userJson) {
+      const _user = JSON.parse(userJson);
+      const user = _user.id;
+      const empresa = _user.id_empresa;
+
+      const { valor, ...formValues } = this.financeiroForm.value;
+      const dtVencFormatted = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
+
+      const formattedValues = {
+        financeiro: {
+          ...formValues,
+          UserIncId: user,
+          Tipo: tipo,
+          OrigemId: 1,
+          IntervaloId: 1,
+          FormaId: 13
+        },
+        parcelas: [
+          {
+            EmpresaId: 1,
+            UserIncId: user,
+            Valor: valor,
+            Dt_venc: dtVencFormatted,
+            Status: 'A'
+          }
+        ]
+      };
+
+      await this._adminApi.postFinanceiro(formattedValues).then(success => {
+        AlertMessageComponent.createBasicNotification(this.notification, 'Sucesso', 'Operação concluída com sucesso.', 'green');
+        this.financeiroForm.reset();
+        this.statusModal = false;
+        this.financeiroAdded.emit();
+      }).catch(error => {
+        //console.log("Erro na chamada post, response: " + error);
+        AlertMessageComponent.createBasicNotification(this.notification, 'Erro', 'Houve um erro na operação.', 'red');
+      });
+    } else {
+      console.error('Erro: Não foi possível obter os dados do usuário para envio.');
+    }
   }
-} 
 
   //funções modal
   showModal(): void {

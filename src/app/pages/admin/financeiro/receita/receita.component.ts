@@ -147,125 +147,21 @@ export class ReceitaComponent implements OnInit {
   }
 
   obterFinanceiros() {
-    // this._adminApi.getFinanceiros()
-    //   .then(data => {
-    //     this.listFinanceiros = data.map((item: any) => new financeirosModel().mapFromApi(item));
-    //             const filteredFinanceiros = this.listFinanceiros.filter((entry: financeirosModel) => entry.Tipo == '1');
-
-    //     this.listFinanceiros = filteredFinanceiros;
-    //   })
-    //   .catch(error => {
-    //     console.error('Erro ao obter financeiros:', error);
-    //   });
-
-      const dados = [
-        {
-            "Id": 1,
-            "UserIncId": 101,
-            "PessoaOrigemId": 202,
-            "EmpresaId": 303,
-            "FormaId": 404,
-            "IntervaloId": 505,
-            "MetodoId": 606,
-            "ContaId": 707,
-            "CategoriaId": 808,
-            "Tipo": "1",
-            "NomePessoaOrigem": "João Silva",
-            "NomeOrigem": "Empresa ABC",
-            "NomeCategoria": "Alimentação",
-            "NomeConta": "Conta Corrente",
-            "NomeTipo": "Compras",
-            "Descricao": "Compra de alimentos para o escritório.",
-            "Obs": "Despesas do mês de julho.",
-            "Valor": 150.75
-        },
-        {
-            "Id": 2,
-            "UserIncId": 102,
-            "PessoaOrigemId": 203,
-            "EmpresaId": 304,
-            "FormaId": 405,
-            "IntervaloId": 506,
-            "MetodoId": 607,
-            "ContaId": 708,
-            "CategoriaId": 809,
-            "Tipo": "1",
-            "NomePessoaOrigem": "Maria Oliveira",
-            "NomeOrigem": "Empresa XYZ",
-            "NomeCategoria": "Venda",
-            "NomeConta": "Conta de Investimentos",
-            "NomeTipo": "Serviços",
-            "Descricao": "Venda de serviços de consultoria.",
-            "Obs": "Receita referente ao projeto de consultoria.",
-            "Valor": 1200.00
-        },
-        {
-            "Id": 3,
-            "UserIncId": 103,
-            "PessoaOrigemId": 204,
-            "EmpresaId": 305,
-            "FormaId": 406,
-            "IntervaloId": 507,
-            "MetodoId": 608,
-            "ContaId": 709,
-            "CategoriaId": 810,
-            "Tipo": "2",
-            "NomePessoaOrigem": "Carlos Santos",
-            "NomeOrigem": "Loja MNO",
-            "NomeCategoria": "Transporte",
-            "NomeConta": "Conta Poupança",
-            "NomeTipo": "Combustível",
-            "Descricao": "Gasto com combustível para a frota.",
-            "Obs": "Despesas de transporte do mês.",
-            "Valor": 320.40
-        },
-        {
-            "Id": 4,
-            "UserIncId": 104,
-            "PessoaOrigemId": 205,
-            "EmpresaId": 306,
-            "FormaId": 407,
-            "IntervaloId": 508,
-            "MetodoId": 609,
-            "ContaId": 710,
-            "CategoriaId": 811,
-            "Tipo": "1",
-            "NomePessoaOrigem": "Ana Pereira",
-            "NomeOrigem": "Freelancer",
-            "NomeCategoria": "Consultoria",
-            "NomeConta": "Conta Empresarial",
-            "NomeTipo": "Projetos",
-            "Descricao": "Consultoria para projeto de TI.",
-            "Obs": "Pagamento por serviços de consultoria.",
-            "Valor": 5000.00
-        },
-        {
-            "Id": 5,
-            "UserIncId": 105,
-            "PessoaOrigemId": 206,
-            "EmpresaId": 307,
-            "FormaId": 408,
-            "IntervaloId": 509,
-            "MetodoId": 610,
-            "ContaId": 711,
-            "CategoriaId": 812,
-            "Tipo": "2",
-            "NomePessoaOrigem": "Fernanda Lima",
-            "NomeOrigem": "Hotel XYZ",
-            "NomeCategoria": "Hospedagem",
-            "NomeConta": "Conta de Viagem",
-            "NomeTipo": "Diárias",
-            "Descricao": "Hospedagem durante viagem de negócios.",
-            "Obs": "Despesas de hospedagem para evento corporativo.",
-            "Valor": 980.00
-        }
-    ]
-    
-
-      this.listFinanceiros = dados.map((item: any) => new financeirosModel().mapFromApi(item));
-      const filteredFinanceiros = this.listFinanceiros.filter((entry: financeirosModel) => entry.Tipo == '1');
-    
-      this.listFinanceiros = filteredFinanceiros;
+    this._adminApi.getFinanceiros()
+      .then(data => {
+        this.listFinanceiros = data.map((item: any) => new financeirosModel().mapFromApi(item));
+        const filteredFinanceiros = this.listFinanceiros.filter((entry: financeirosModel) => entry.Tipo == 'E');
+        this.listFinanceiros = filteredFinanceiros;
+        
+        this.vrReceitas = filteredFinanceiros.reduce((total: number, entry: financeirosModel) => total + entry.Valor, 0);
+      })
+      .catch(error => {
+        console.error('Erro ao obter financeiros:', error);
+      });
+  }
+  
+  onFinanceiroAdded(): void {
+    this.obterFinanceiros();
   }
 
   formatDate(date: any): string {
@@ -273,8 +169,15 @@ export class ReceitaComponent implements OnInit {
   }
 
   formatMoeda(valor: any): string {
-    return  valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    let numericValue = typeof valor === 'string' ? parseFloat(valor) : valor;
+  
+    if (isNaN(numericValue)) {
+      return 'R$ 0,00';
+    }
+  
+    return numericValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
+  
 
   open(): void {
     this.visible = true;

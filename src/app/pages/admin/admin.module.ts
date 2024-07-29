@@ -45,6 +45,7 @@ import { ComercioAnualComponent } from './financeiro/components/graficos/comerci
 import { PainelComponent } from './pdv/painel/painel.component';
 import { HomeComponent } from './pdv/home/home.component';
 import { PagarComponent } from './pdv/painel/components/pagar/pagar.component';
+import { AlertMessageComponent } from './financeiro/components/alert-message/alert-message.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { PagarComponent } from './pdv/painel/components/pagar/pagar.component';
     ComercioAnualComponent,
     PainelComponent,
     HomeComponent,
-    PagarComponent
+    PagarComponent,
+    AlertMessageComponent
   ],
   imports: [
     CommonModule,

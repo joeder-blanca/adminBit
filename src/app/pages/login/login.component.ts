@@ -49,17 +49,33 @@ export class LoginComponent implements OnInit {
     const userName = this.validateForm.get('userName')!.value;
     const password = this.validateForm.get('password')!.value;
 
-    if(this.router.url === '/admin-about'){
-      this.router.navigate(['/admin/index']);
-    }else if(this.router.url === '/dinner-about'){
-      this.router.navigate(['/dinner/index']);
+    if (this.validateForm.valid) {
+      this.authService.login(userName, password)
+      .subscribe({
+        next: (v) => this.processarSucesso(v),
+        error: (e) => this.processarFalha(e),
+        complete: () => console.info('complete')
+      });
+    } else {
+      Object.values(this.validateForm.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      })
     }
   }
 
   processarSucesso(response: any) {
     this.responseLogin = response;
     this.authService.LocalStorage.salvarDadosLocaisUsuario(response);
-    this.router.navigate(['/admin/index']);
+
+    if(this.router.url === '/admin-about'){
+      this.router.navigate(['/admin/index']);
+    }else if(this.router.url === '/dinner-about'){
+      this.router.navigate(['/dinner/index']);
+    }
+
   }
 
   processarFalha(fail: any) {

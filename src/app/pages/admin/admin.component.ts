@@ -7,8 +7,9 @@ import { NzPlacementType } from 'ng-zorro-antd/dropdown';
 interface MenuItem {
   title: string;
   link: string;
-  claim: string;
+  claim: string[];
 }
+
 
 
 @Component({
@@ -19,25 +20,28 @@ interface MenuItem {
 export class AdminAppComponent {
 
   menuFinanceiro: MenuItem[] = [
-    { title: 'Receitas', link: './receitas', claim: 'STANDARD' },
-    { title: 'Despesas', link: './despesas', claim: 'STANDARD' },
-    { title: 'Pagar/Receber', link: './contas', claim: 'STANDARD' },
-    { title: 'Fluxo de Caixa', link: './fluxo', claim: 'STANDARD' },
-    { title: 'Planejamento', link: './planejamento', claim: 'STANDARD' }
+    { title: 'Receitas', link: './receitas', claim: ['STANDARD', 'PRO', 'MASTER', 'ADMIN'] },
+    { title: 'Despesas', link: './despesas', claim: ['STANDARD', 'PRO', 'MASTER', 'ADMIN'] },
+    { title: 'Pagar/Receber', link: './contas', claim: ['STANDARD', 'PRO', 'MASTER', 'ADMIN'] },
+    { title: 'Fluxo de Caixa', link: './fluxo', claim: ['STANDARD', 'PRO', 'MASTER', 'ADMIN'] },
+    { title: 'Planejamento', link: './planejamento', claim: ['STANDARD', 'PRO', 'MASTER', 'ADMIN'] }
   ];
+  
 
   menuPedidos: MenuItem[] = [
-    { title: 'Dashboard', link: './dashboard', claim: 'STANDARD' },
-    { title: 'Compras', link: './compra', claim: 'STANDARD' },
-    { title: 'Vendas', link: './venda', claim: 'STANDARD' },
+    { title: 'Dashboard', link: './dashboard', claim: ['STANDARD', 'PRO', 'MASTER', 'ADMIN'] },
+    { title: 'Compras', link: './compra', claim: ['STANDARD', 'PRO', 'MASTER', 'ADMIN'] },
+    { title: 'Vendas', link: './venda', claim: ['STANDARD', 'PRO', 'MASTER', 'ADMIN'] },
   ];
+  
 
   menuPDV: MenuItem[] = [
-    { title: 'Caixas', link: './pdv', claim: 'STANDARD' },
+    { title: 'Caixas', link: './pdv', claim: ['STANDARD', 'PRO', 'MASTER', 'ADMIN'] },
   ];
+  
 
   menuCadastros: MenuItem[] = [
-    { title: 'Cadastros', link: './cadastros', claim: 'STANDARD' },
+    { title: 'Cadastros', link: './cadastros', claim: ['STANDARD', 'PRO', 'MASTER', 'ADMIN'] },
   ];
   
 
@@ -53,22 +57,25 @@ export class AdminAppComponent {
   ) { }
 
   ngOnInit(): void {
-    //this.obtemClaims();
+    this.obtemClaims();
   }
 
   obtemClaims() {
     const user = localStorage.getItem('bitADMIN.user');
-    
+  
     if (user) {
       this._user = JSON.parse(user);
-
+  
       if (this._user && Array.isArray(this._user.claims)) {
         this.userLabel = this._user.username;
-        const standardRoles = this._user.claims.some((claim: any) => claim.type === 'role' && claim.value === 'STANDARD');
+        const allowedRoles = ['STANDARD', 'PRO', 'MASTER', 'ADMIN'];
+        const userRoles = this._user.claims
+          .filter((claim: any) => claim.type === 'role')
+          .map((claim: any) => claim.value);
   
-        if (standardRoles) {
-          this.filteredMenuItems = this.menuFinanceiro.filter(item => item.claim === 'STANDARD');
-        }
+        this.filteredMenuItems = this.menuFinanceiro.filter(item =>
+          item.claim.some((claim: string) => userRoles.includes(claim))
+        );
       } else {
         console.error('Estrutura do token de usuário inválida:', this._user);
       }
@@ -77,12 +84,13 @@ export class AdminAppComponent {
     }
   }
   
+  
 
   isAuthenticated(): boolean {
-    // if (!this.authService.loggedIn) {
-    //   this.router.navigate(['/admin-about']);
-    //   return true;
-    // }
+    if (!this.authService.loggedIn) {
+      this.router.navigate(['/admin-about']);
+      return true;
+    }
     return true;
   }
 

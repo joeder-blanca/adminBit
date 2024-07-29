@@ -34,7 +34,7 @@ export  class BaseService{
     public urlGetMetodos = `${this.UrlServiceV1}/listas/listas.php?tabela=sf_metodos&EmpresaId={EmpresaId}`;
     public urlGetFpgto = `${this.UrlServiceV1}/listas/listas.php?tabela=sf_forma_pgto&EmpresaId={EmpresaId}`;
     
-    public urlGetFinanceiros = `${this.UrlServiceV1}/financeiro/sf.php?EmpresaId={EmpresaId}`
+    public urlGetFinanceiros = `${this.UrlServiceV1}/financeiro/getFinanceiro.php?EmpresaId={EmpresaId}`
 
     public urlGetTotais = `${this.UrlServiceV1}/totais/getTotaisPeriodo.php?idUser={idUser}&idEmpresa={idEmpresa}`;
     

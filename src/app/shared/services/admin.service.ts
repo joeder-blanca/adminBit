@@ -92,25 +92,23 @@ export class adminApiProvider {
 
     public getFinanceiros(): Promise<financeirosModel[]>{
       const userJson = localStorage.getItem('bitADMIN.user');
-        if (userJson) {
-          const user = JSON.parse(userJson);
-          this._idUser = user.id;
-          this._idEmpresa = user.id_empresa
-        } else {
-          console.error('Usuário não encontrado');
-        }
+      if (userJson) {
+        const user = JSON.parse(userJson);
+        this._idEmpresa = user.id_empresa
+      } else {
+        console.error('Usuário não encontrado');
+      }
 
       let url = this.apiService.urlGetFinanceiros;
-      url = url.replace("{idUser}", this._idUser);
       url = url.replace("{EmpresaId}", this._idEmpresa);
 
       return new Promise((resolve, reject) => {
         this.httpClient.get(url,true,false).then((response : any) => {
           let financeiros: financeirosModel[] = [];
-          if(JSON.stringify(response.financeiros) === '{}'){
+          if(JSON.stringify(response) === '{}'){
             financeiros = [];
           }else {
-            for(const item of response.financeiros){
+            for(const item of response){
               financeiros.push(new financeirosModel().mapFromApi(item));
             }
           }
@@ -122,36 +120,6 @@ export class adminApiProvider {
       })
     }
 
-    public getPessoas(): Promise<pessoasModel[]>{
-      const userJson = localStorage.getItem('bitADMIN.user');
-        if (userJson) {
-          const user = JSON.parse(userJson);
-          this._idEmpresa = user.id_empresa
-        } else {
-          console.error('Usuário não encontrado');
-        }
-
-      let url = this.apiService.urlGetPessoas;
-      url = url.replace("{EmpresaId}", this._idEmpresa);
-
-      return new Promise((resolve, reject) => {
-        this.httpClient.get(url,true,false).then((response : any) => {
-          let pessoas: pessoasModel[] = [];
-          if(JSON.stringify(response) === '{}'){
-            pessoas = [];
-          }else {
-            for(const item of response){
-              pessoas.push(new pessoasModel().mapFromApi(item));
-            }
-          }
-          resolve(pessoas);
-        }, (err) => {
-          reject(err);
-        })
-      })
-
-
-    }
 
     public getContas(): Promise<contasModel[]>{
       const userJson = localStorage.getItem('bitADMIN.user');
@@ -275,6 +243,36 @@ export class adminApiProvider {
 
     }
 
+    public getPessoas(): Promise<pessoasModel[]>{
+      const userJson = localStorage.getItem('bitADMIN.user');
+        if (userJson) {
+          const user = JSON.parse(userJson);
+          this._idEmpresa = user.id_empresa
+        } else {
+          console.error('Usuário não encontrado');
+        }
+
+      let url = this.apiService.urlGetPessoas;
+      url = url.replace("{EmpresaId}", this._idEmpresa);
+
+      return new Promise((resolve, reject) => {
+        this.httpClient.get(url,true,false).then((response : any) => {
+          let pessoas: pessoasModel[] = [];
+          if(JSON.stringify(response) === '{}'){
+            pessoas = [];
+          }else {
+            for(const item of response){
+              pessoas.push(new pessoasModel().mapFromApi(item));
+            }
+          }
+          resolve(pessoas);
+        }, (err) => {
+          reject(err);
+        })
+      })
+    }
+
+
     public postFinanceiro(item: any): Promise<void>{
       const userJson = localStorage.getItem('bitADMIN.user');
       if (userJson) {
@@ -286,8 +284,6 @@ export class adminApiProvider {
 
       let url = this.apiService.urlPostFinanceiros;
       url = url.replace("{EmpresaId}", this._idEmpresa);
-      // url = url.replace(";", "");
-      // console.log(url)
     
       return new Promise((resolve, reject) => {
         this.httpClient.post(url, item, true, false)
